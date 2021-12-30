@@ -53,17 +53,18 @@ class AttendanceController extends Controller
      */
     public function store(AttendanceRequest $request)
     {
-        Attendance::create([
-                'user_id' => \Auth::user()->id,
-            $request->only([
+        $data = $request->only([
                 'students_id',
                 'date',
                 'absence_time',
                 'arrival_time',
                 'contact',
                 'reason',
-            ])
-        ]);
+            ]);
+        $data["user_id"]=\Auth::user()->id;
+    
+        Attendance::create($data);
+        
         return back();
     }
 
