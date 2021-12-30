@@ -13,7 +13,7 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id')->default(Auth::id());
+            $table->unsignedBigInteger('user_id');
             $table->string('year');
             $table->integer('grade');
             $table->integer('class');

@@ -10,7 +10,8 @@ class CreateAttendancesTable extends Migration
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id')->default(Auth::id());
+            $table->unsignedBigInteger('user_id');
+            // $table->unsignedBigInteger('user_id')->default(Auth::id());
             $table->unsignedBigInteger('students_id');
             $table->date('date');
             $table->string('absence_time');

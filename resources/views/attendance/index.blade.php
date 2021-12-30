@@ -87,7 +87,7 @@
                                         <div>
                                             <input type="radio" name="absence_time" value="欠課" @if(old('absence_time') === "欠課" )'checked' @endif
                                                         onclick="checkedTimeOff('arrival_time',this.checked);" >欠課
-                                            <input type="radio" name="absence_time" value="欠席"@if(old('absence_time') === "欠席" )'checked' @endif>欠席
+                                            <input type="radio" name="absence_time" value="欠席" @if(old('absence_time') === "欠席" )'checked' @endif>欠席
                                         </div>
                                         <div>
                                             <label>
@@ -119,7 +119,7 @@
                                                 <textarea name="reason" rows="5" cols="40">{{ old('reason') }}</textarea>
                                             </label>
                                         </div>
-                                        <input type="hidden" name="user_id" value="{{ $student->user_id }}">
+{{--                                        <input type="hidden" name="user_id" value="{{ $student->user_id }}"> --}}
                                         <input type="hidden" name="students_id" value="{{ $student->id }}">
                                         <input class="btn btn-info" type="submit" value="保存">
                                     </form>
