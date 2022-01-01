@@ -1,6 +1,7 @@
 @extends('layouts.logged_in')
 @section('content')
-<div class="float-right">
+<div>
+    
     <form class="form-inline" method="GET" action="{{ route('students.search') }}">
         <div class="form-group form-row">
             <select name="grade">
@@ -21,14 +22,16 @@
         </div>
             <input class="btn btn-info" type="submit" value="検索">
     </form>
-    <a class="btn btn-outline-info" href="{{ route('attendance.index') }}">検索リセット</a>
+    <a class="btn btn-outline-info" href="{{ route('students.index') }}">検索リセット</a>
 </div>
 
+    {{--
     <form method="post" action="/students_import" enctype="multipart/form-data">
         @csrf
         <input type="file" name="excel_file" ><br>
         <input type="submit" value="インポート">
     </form>
+    --}}
     <table class="table">
         <thead class="thead-dark">
             <tr>

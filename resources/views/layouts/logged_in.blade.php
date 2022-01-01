@@ -16,8 +16,8 @@
     </button>
     <div class="collapse navbar-collapse" id="mainNav">
       <ul>
-        <li><a href={{ route('attendance.index') }}>欠課・欠席入力</a></li>
-        <li>欠課・欠席履歴</li>
+        <li><a href={{ route('students.index') }}>欠課・欠席入力</a></li>
+        <li><a href={{ route('attendance.index') }}>欠課・欠席履歴</a></li>
         <li>名簿操作</li>
       </ul>
     </div>

@@ -15,7 +15,7 @@ class CreateAttendancesTable extends Migration
             $table->unsignedBigInteger('students_id');
             $table->date('date');
             $table->string('absence_time');
-            $table->string('arrival_time');
+            $table->string('arrival_time')->nullable();
             $table->string('contact');
             $table->text('reason');
             $table->timestamps();

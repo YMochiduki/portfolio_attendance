@@ -31,15 +31,13 @@
     </header>
 </div>
 
-<!--<div class="container">-->
     <div class="row offset-1">
         <div class="col-sm-9 col-10  order-2 order-sm-1">
-        <!--<div class="col-sm-7 offset-sm-2 order-sm-2 col-10 offset-1">-->
             @yield('content')
         </div>
-        <div class="col-sm-2 col-10 order-1 order-sm-2 right_menu">
-        <!--<div class="col-sm-3 order-sm-1 col-10 offset-1  right_menu">-->
+        <div class="col-sm-2 col-10 order-1 order-sm-2 right_menu" style="background:#0000ff">
             @yield('right_menu')
+    
         </div>
 
     </div>

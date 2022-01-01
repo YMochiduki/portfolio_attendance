@@ -6,12 +6,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/students.index', 'StudentsController@index')->name('students.index');
+// Route::get('list.index',)
+Route::post('/students_import','StudentsController@import');
+Route::get('students/search', 'StudentsController@search')->name('students.search');
+
 //欠席連絡入力
 Route::resource('attendance', 'AttendanceController');
-Route::get('students/search', 'AttendanceController@search')->name('students.search');
-
+Route::get('attendance/search', 'AttendanceController@search')->name('attendance.search');
 //名簿エディット
 Route::resource('/admin', 'AdminController');
 
-Route::post('/students_import','StudentsController@import')->name('import');
 
