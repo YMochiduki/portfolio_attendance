@@ -17,12 +17,9 @@
                 <option value="3">3組</option>
             </select>
         </div>
-        <div class="form-group">
-            欠課・欠席有のみ<input type="checkbox" name="attendance">
-        </div>
             <input class="btn btn-info" type="submit" value="検索">
     </form>
-    <a class="btn btn-outline-info" href="{{ route('students.index') }}">検索リセット</a>
+    <a class="btn btn-outline-info" href="{{ route('attendance.index') }}">検索リセット</a>
 </div>
 
     {{--
@@ -123,7 +120,7 @@
                                             </label>
                                         </div>
 {{--                                        <input type="hidden" name="user_id" value="{{ $student->user_id }}"> --}}
-                                        <input type="hidden" name="students_id" value="{{ $student->id }}">
+                                        <input type="hidden" name="student_id" value="{{ $student->id }}">
                                         <input class="btn btn-info" type="submit" value="保存">
                                     </form>
                                 </div>

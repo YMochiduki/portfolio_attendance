@@ -25,7 +25,7 @@ class AttendanceRequest extends FormRequest
     public function rules()
     {
         return [
-            'students_id' => ['required'],
+            'student_id' => ['required'],
             'date' => ['required'],
             'absence_time' => ['required'],
             'arrival_time' => ['required_if:absence_time,"欠課'],

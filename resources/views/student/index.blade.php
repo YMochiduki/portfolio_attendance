@@ -18,7 +18,7 @@
             </select>
         </div>
         <div class="form-group">
-            <input type="number"
+            <input type="number">
         </div>
             <input class="btn btn-info" type="submit" value="検索">
     </form>

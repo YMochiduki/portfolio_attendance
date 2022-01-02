@@ -13,7 +13,7 @@ class RegisterController extends Controller
 {
     use RegistersUsers;
 
-    protected $redirectTo = 'students.index';
+    protected $redirectTo = 'attendance';
 
     public function __construct()
     {

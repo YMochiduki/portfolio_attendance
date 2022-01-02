@@ -20,7 +20,7 @@ class StudentsController extends Controller
     public function index()
     {
         $students = Student::all()->where('user_id' ,'=' ,\Auth::id());
-        return view('students.index',[
+        return view('student.index',[
             'students' =>$students
         ]);
     }
@@ -31,7 +31,7 @@ class StudentsController extends Controller
         $search = $request->search;
         $students = Student::where('grade', $request->grade)->where('class', $request->class)->get();
 
-        return view('students.index',[
+        return view('attendance.index',[
             'students' =>$students
         ]);
     }

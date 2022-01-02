@@ -62,7 +62,7 @@
     </form>
 </div>
 <div>
-    <form method="post" action="/students_export">
+    <form method="post" action="/attendances_export">
         @csrf
         <input type="submit" value="生徒データダウンロード">
     </form>
@@ -176,7 +176,7 @@
                                                 <textarea name="reason" rows="5" cols="40">{{ old('reason') }}</textarea>
                                             </label>
                                         </div>
-                                        <input type="hidden" name="students_id" value="{{ $student->id }}">
+                                        <input type="hidden" name="student_id" value="{{ $student->id }}">
                                         <input class="btn btn-info" type="submit" value="保存">
                                     </form>
                                 </div>

@@ -7,6 +7,8 @@ use App\Student;
 use App\Attendance;
 use App\Http\Requests\AttendanceRequest;
 use App\User;
+use App\Exports\AttendanceExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AttendanceController extends Controller
 {
@@ -15,11 +17,15 @@ class AttendanceController extends Controller
         $this->middleware('auth');
     }
     
+    public function export(){
+        return Excel::download(new AttendanceExport, 'output_attendance_data.xlsx');
+    }
+    
     public function index()
     {
-        $attendances = Attendance::all()->where('user_id','=',\Auth::id());
-        return view('attendance.record',[
-            'attendances' => $attendances
+        $students = Student::all()->where('user_id' ,'=' ,\Auth::id());
+        return view('attendance.index',[
+            'students' =>$students
         ]);
     }
     
@@ -31,7 +37,7 @@ class AttendanceController extends Controller
 
 
         $attendance = Attendance::where('user_id', \Auth::id())
-            ->join('students', 'id', '=', 'attendances.students_id');
+            ->join('students', 'id', '=', 'attendances.student_id');
         
         return view('attendance.record',[
             'attendances' => $attendances
@@ -40,13 +46,17 @@ class AttendanceController extends Controller
 
     public function create()
     {
-        //
+        $attendances = Attendance::all()->where('user_id','=',\Auth::id())
+            ->join('students','attendances.student_id', '=', 'students.id'); 
+        return view('attendance.record',[
+            'attendances' => $attendances
+        ]);
     }
 
     public function store(AttendanceRequest $request)
     {
         $data = $request->only([
-                'students_id',
+                'student_id',
                 'date',
                 'absence_time',
                 'arrival_time',
@@ -75,7 +85,7 @@ class AttendanceController extends Controller
         $attendance = Attendance::find($id);
         
         $attendance->update($request->only([
-            'students_id',
+            'student_id',
             'date',
             'absence_time',
             'arrival_time',
@@ -94,4 +104,6 @@ class AttendanceController extends Controller
     {
         //
     }
+    
+    
 }
