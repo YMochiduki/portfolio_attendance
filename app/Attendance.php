@@ -11,5 +11,4 @@ class Attendance extends Model
     public function students(){
       return $this->belongsTo('App\Student');
     }
-    
 }

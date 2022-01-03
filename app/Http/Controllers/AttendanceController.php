@@ -34,8 +34,6 @@ class AttendanceController extends Controller
         
         // $attendances = Attendance::where('user_id', \Auth::id())->where('date', $request->date)->where('grade', $request->grade)->where('class', $request->class)->get();
         $search = $request->search;
-
-
         $attendance = Attendance::where('user_id', \Auth::id())
             ->join('students', 'id', '=', 'attendances.student_id');
         
@@ -46,8 +44,9 @@ class AttendanceController extends Controller
 
     public function create()
     {
-        $attendances = Attendance::all()->where('user_id','=',\Auth::id())
-            ->join('students','attendances.student_id', '=', 'students.id'); 
+        $attendances = Attendance::all()->where('user_id','=',\Auth::id());
+            // ->join('students','attendances.student_id', '=', 'students.id'); 
+        // return $attendances;
         return view('attendance.record',[
             'attendances' => $attendances
         ]);

@@ -109,7 +109,7 @@
                                                 <select name="contact">
                                                     <option value="保護者" @if(old('contact') === "保護者" )'selected' @endif>保護者</option>
                                                     <option valus="本人" @if(old('contact') === "本人" )'selected' @endif>本人</option>
-                                                    <option value="その他" @if(old('contact') === "その他" )'selected' @endif>>その他（詳細は理由欄に記入）</option>
+                                                    <option value="その他" @if(old('contact') === "その他" )'selected' @endif>その他（詳細は理由欄に記入）</option>
                                                 </select>
                                             </label>
                                         </div>    

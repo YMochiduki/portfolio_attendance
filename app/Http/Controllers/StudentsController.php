@@ -9,6 +9,7 @@ use App\Student;
 use App\Attendance;
 use App\Http\Requests\AttendanceRequest;
 use App\User;
+use App\Services\SearchService;
 
 class StudentsController extends Controller
 {
@@ -24,18 +25,24 @@ class StudentsController extends Controller
             'students' =>$students
         ]);
     }
+    
 
-    public function search(Request $request){
+    public function search(Request $request, SearchService $service){
         $request->validate(['search' => ['require']]);
-        $students = '';
-        $search = $request->search;
-        $students = Student::where('grade', $request->grade)->where('class', $request->class)->get();
-
+        $students = $service->searchStudents($request);
         return view('attendance.index',[
             'students' =>$students
         ]);
     }
 
+    public function searchList(Request $request, SearchService $service){
+        $request->validate(['search' => ['require']]);
+        $students = $service->searchStudents($request);
+        return view('student.index',[
+            'students' =>$students
+        ]);
+    }
+    
     public function import(Request $request){
         $request->validate(['excel_file'=>['required']]);
         
@@ -45,6 +52,19 @@ class StudentsController extends Controller
         
         Excel::import(new StudentImport, $excel_file);
         return redirect()->action('StudentsController@index');
+    }
+    
+    public function update(Request $request,$id){
+        $student = Student::find($id);
+        $student->update($request->only([
+                'year',
+                'grade',
+                'class',
+                'number',
+                'name',
+            ]));
+
+        return back();
     }
     
     public function destroyOne($id){

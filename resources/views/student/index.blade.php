@@ -2,7 +2,7 @@
 @section('content')
 <div>
     
-    <form class="form-inline" method="GET" action="{{ route('students.search') }}">
+    <form class="form-inline" method="GET" action="{{ route('students.searchList') }}">
         <div class="form-group form-row">
             <select name="grade">
                 <option value="1">1年</option>
@@ -46,24 +46,28 @@
         <tbody>
         @forelse($students as $student)
             <tr>
-                <td>
-                    <input type="number" name="year" value="{{ $student->year }}">年度
-                </td>
-                <td>
-                    <input type="number" name="grade" value="{{ $student->grade }}">年
-                </td>
-                <td>
-                    <input type="number" name="class" value="{{ $student->class }}">組
-                </td>
-                <td>
-                    <input type="number" name="number" value="{{ $student->number }}">番
-                </td>
-                <td>
-                    <input type="text" name="name" value="{{ $student->name }}">
-                </td>
-                <td>
-                    <button></button>
-                </td>
+                <form method="POST" action="{{ route('students.update', $student->id) }}">
+                @csrf
+                @method('patch')
+                    <td> 
+                        <input type="number" name="year" value="{{ $student->year }}">年度
+                    </td>
+                    <td>
+                        <input type="number" name="grade" value="{{ $student->grade }}">年
+                    </td>
+                    <td>
+                        <input type="number" name="class" value="{{ $student->class }}">組
+                    </td>
+                    <td>
+                        <input type="number" name="number" value="{{ $student->number }}">番
+                    </td>
+                    <td>
+                        <input type="text" name="name" value="{{ $student->name }}">
+                    </td>
+                    <td>
+                        <input class="btn btn-info" type="submit" value="編集反映">
+                    </td>
+                </form>
             </tr>
         </tbody>
         @empty

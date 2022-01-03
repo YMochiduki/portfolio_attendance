@@ -18,7 +18,7 @@ class CreateAttendancesTable extends Migration
             $table->string('contact');
             $table->text('reason');
             $table->timestamps();
-    
+            
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
         });
