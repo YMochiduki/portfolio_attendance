@@ -17,10 +17,7 @@
                 <option value="3">3組</option>
             </select>
         </div>
-        <div class="form-group">
-            <input type="number">
-        </div>
-            <input class="btn btn-info" type="submit" value="検索">
+        <input class="btn btn-info" type="submit" value="検索">
     </form>
     <a class="btn btn-outline-info" href="{{ route('students.index') }}">検索リセット</a>
 </div>

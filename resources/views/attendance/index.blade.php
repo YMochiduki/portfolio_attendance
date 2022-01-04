@@ -85,21 +85,21 @@
                                     @csrf
                                         <input type="date" name="date" value="{{ old('date') }}">
                                         <div>
-                                            <input type="radio" name="absence_time" value="欠課" @if(old('absence_time') === "欠課" )'checked' @endif
+                                            <input type="radio" name="absence_time" value="欠課" @if(old('absence_time') === "欠課" )checked="checked" @endif
                                                         onclick="checkedTimeOff('arrival_time',this.checked);" >欠課
-                                            <input type="radio" name="absence_time" value="欠席" @if(old('absence_time') === "欠席" )'checked' @endif>欠席
+                                            <input type="radio" name="absence_time" value="欠席" @if(old('absence_time') === "欠席" )checked="checked" @endif>欠席
                                         </div>
                                         <div>
                                             <label>
                                                 到着予定時間：
                                                 <select id="arrival_time" name="arrival_time">
                                                     <option value=""></option>
-                                                    <option value="1限目" @if(old('arrival_time') === "1限目" )'selected' @endif>1限目</option>
-                                                    <option value="2限目" @if(old('arrival_time') === "2限目" )'selected' @endif>2限目</option>
-                                                    <option value="3限目" @if(old('arrival_time') === "3限目" )'selected' @endif>3限目</option>
-                                                    <option value="4限目" @if(old('arrival_time') === "4限目" )'selected' @endif>4限目</option>
-                                                    <option value="5限目" @if(old('arrival_time') === "5限目" )'selected' @endif>5限目</option>
-                                                    <option value="6限目" @if(old('arrival_time') === "6限目" )'selected' @endif>6限目</option>
+                                                    <option value="1限目" @if(old('arrival_time') === "1限目" )selected @endif>1限目</option>
+                                                    <option value="2限目" @if(old('arrival_time') === "2限目" )selected @endif>2限目</option>
+                                                    <option value="3限目" @if(old('arrival_time') === "3限目" )selected @endif>3限目</option>
+                                                    <option value="4限目" @if(old('arrival_time') === "4限目" )selected @endif>4限目</option>
+                                                    <option value="5限目" @if(old('arrival_time') === "5限目" )selected @endif>5限目</option>
+                                                    <option value="6限目" @if(old('arrival_time') === "6限目" )selected @endif>6限目</option>
                                                 </select>までに到着予定
                                             </label>
                                         </div>
@@ -107,9 +107,9 @@
                                             <label>
                                                 連絡者：
                                                 <select name="contact">
-                                                    <option value="保護者" @if(old('contact') === "保護者" )'selected' @endif>保護者</option>
-                                                    <option valus="本人" @if(old('contact') === "本人" )'selected' @endif>本人</option>
-                                                    <option value="その他" @if(old('contact') === "その他" )'selected' @endif>その他（詳細は理由欄に記入）</option>
+                                                    <option value="保護者" @if(old('contact') === "保護者" )selected @endif>保護者</option>
+                                                    <option valus="本人" @if(old('contact') === "本人" )selected @endif>本人</option>
+                                                    <option value="その他" @if(old('contact') === "その他" )selected @endif>その他（詳細は理由欄に記入）</option>
                                                 </select>
                                             </label>
                                         </div>    
