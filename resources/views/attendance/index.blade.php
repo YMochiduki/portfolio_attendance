@@ -3,6 +3,7 @@
 <div>
     
     <form class="form-inline" method="GET" action="{{ route('students.search') }}">
+    @csrf
         <div class="form-group form-row">
             <select name="grade">
                 <option value="1">1年</option>
@@ -21,14 +22,6 @@
     </form>
     <a class="btn btn-outline-info" href="{{ route('attendance.index') }}">検索リセット</a>
 </div>
-
-    {{--
-    <form method="post" action="/students_import" enctype="multipart/form-data">
-        @csrf
-        <input type="file" name="excel_file" ><br>
-        <input type="submit" value="インポート">
-    </form>
-    --}}
     <table class="table">
         <thead class="thead-dark">
             <tr>
@@ -57,17 +50,9 @@
                     {{ $student->name }}
                 </td>
                 <td>
-                    準備中
+                    
                     {{-- $student->name --}}
                 </td>
-                <!--<td>-->
-                <!--    {{ $student->attendance }}-->
-                <!--    @if($student->attendance === 0)-->
-                <!--        <input type="submit" value="編集">-->
-                <!--    @else-->
-                <!--        <input type="submit" value="入力">-->
-                <!--    @endif-->
-                <!--</td>-->
                 <td>
                     <button class="btn btn-info" data-toggle="modal" data-target="#modal{{ $student->id }}">入力</button>
             
@@ -119,7 +104,6 @@
                                                 <textarea name="reason" rows="5" cols="40">{{ old('reason') }}</textarea>
                                             </label>
                                         </div>
-{{--                                        <input type="hidden" name="user_id" value="{{ $student->user_id }}"> --}}
                                         <input type="hidden" name="student_id" value="{{ $student->id }}">
                                         <input class="btn btn-info" type="submit" value="保存">
                                     </form>

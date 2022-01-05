@@ -9,6 +9,7 @@ use App\Http\Requests\AttendanceRequest;
 use App\User;
 use App\Exports\AttendanceExport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Services\SearchService;
 
 class AttendanceController extends Controller
 {
@@ -25,18 +26,41 @@ class AttendanceController extends Controller
     {
         $students = Student::all()->where('user_id' ,'=' ,\Auth::id());
         return view('attendance.index',[
-            'students' =>$students
+            'students' =>$students,
         ]);
     }
     
-    public function search(Request $request){
-        $request->validate(['search' => ['require']]);
+    public function search(Request $request, SearchService $service)
+    {
+
+        $attendances = $service->searchAttendances($request);
+        return $attendances;
         
-        // $attendances = Attendance::where('user_id', \Auth::id())->where('date', $request->date)->where('grade', $request->grade)->where('class', $request->class)->get();
-        $search = $request->search;
-        $attendance = Attendance::where('user_id', \Auth::id())
-            ->join('students', 'id', '=', 'attendances.student_id');
+        $date = $request->input('date');
+        $grade = $request->input('grade');
+        $class = $request->input('class');
         
+        $attendances = Attendance::all()->where('user_id','=',\Auth::id())
+            ->join('students', 'attendances.student_id', '=', 'students.id');
+        
+        // return $attendances;
+        
+        if($date !== ''){
+            $attendances = $attendances->where('date' ,'=', $date);
+        }
+        if($grade !== ''){
+            $attendances = $attendances->where($attendances->student->grade, '=', $grade);
+        }
+
+
+        
+        // $search = $request->search;
+        // if($search !== null){
+        //     $query = Attendance::query()->join('users', 'user_id', '=', 'user.id');
+        //     $query->orwhere('attendances.date', '=', $search->date ); 
+        // }
+        // $attendance = Attendance::where('user_id', \Auth::id())
+        // $attendances = $query;
         return view('attendance.record',[
             'attendances' => $attendances
         ]);
@@ -45,8 +69,6 @@ class AttendanceController extends Controller
     public function create()
     {
         $attendances = Attendance::all()->where('user_id','=',\Auth::id());
-            // ->join('students','attendances.student_id', '=', 'students.id'); 
-        // return $attendances;
         return view('attendance.record',[
             'attendances' => $attendances
         ]);
@@ -84,24 +106,21 @@ class AttendanceController extends Controller
         $attendance = Attendance::find($id);
         
         $attendance->update($request->only([
-            'student_id',
             'date',
             'absence_time',
             'arrival_time',
             'contact',
             'reason',
         ]));
+        
+        return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $attendance = Attendance::find($id);
+        $attendance->delete();
+        return back();
     }
     
     

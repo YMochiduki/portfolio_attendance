@@ -1,18 +1,18 @@
 @extends('layouts.logged_in')
 @section('content')
 <div>
-    {{--
-    <form class="form-inline" method="GET" action="{{ route('attendance.search') }}">
-    --}}
-    <form method="GET" action="{{ route('attendance.search') }}">
+    <form method="GET" action="{{ route('attendances.search') }}">
+        @csrf
         <div>
             
                 <label>
                     欠課・欠席日
                     <input type="date" name="date">
                 </label>
+            
                 <label>
                     <select name="grade">
+                        <option value=""></option>
                     @for($i=1; $i <= 3; $i++)
                         <option value="{{ $i }}">{{ $i }}</option>    
                     @endfor
@@ -21,6 +21,7 @@
                 </label>
                 <label>
                     <select name="class">
+                        <option value=""></option>
                     @for($i=1; $i <= 3; $i++)
                         <option value="{{ $i }}">{{ $i }}</option>    
                     @endfor
@@ -28,11 +29,9 @@
                     組
                 </label>
         </div>
-    
             <input class="btn btn-info" type="submit" value="検索">
-            <a class="btn btn-outline-info" href="{{ route('attendance.index') }}">検索リセット</a>
-    
-    </form>
+        </form>
+            <a class="btn btn-outline-info" href="{{ route('attendance.create') }}">検索リセット</a>
 </div>
 <div>
     <form method="post" action="/attendances_export">
@@ -49,7 +48,7 @@
     <p>条件を設定して検索してください。</p>
 @else
 --}}
-    </form>
+
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -110,8 +109,9 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form method="post" action="{{ route('attendance.store') }}">
+                                    <form method="post" action="{{ route('attendance.update', $attendance->id) }}">
                                     @csrf
+                                    @method('patch')
                                         <input type="date" name="date" value={{ $attendance->date }}>
                                         <div>
                                             <input type="radio" name="absence_time" value="欠課" @if($attendance->absence_time === "欠課") checked="checked" @endif
@@ -149,19 +149,23 @@
                                                 <textarea name="reason" rows="5" cols="40">{{ $attendance->reason }}</textarea>
                                             </label>
                                         </div>
-                                        <input type="hidden" name="id" value="{{ $attendance->id }}">
+                                        <input type="hidden" name="student_id" value="{{ $attendance->student_id }}">
                                         <input class="btn btn-info" type="submit" value="編集反映">
+                                    </form>
+                                    <form method="post" action="{{ route('attendance.destroy',$attendance->id) }}">
+                                        @csrf
+                                        @method('delete')
+                                        <input class="btn btn-dark" type="submit" value="削除">
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </td>
---}}
         </tr>
         </tbody>
         @empty
-            <p>条件に一致する欠課・欠席。</p>
+            <p>条件に一致する欠課・欠席はありません。</p>
         @endforelse
     </table>
 {{--

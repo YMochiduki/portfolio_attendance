@@ -3,6 +3,7 @@
 <div>
     
     <form class="form-inline" method="GET" action="{{ route('students.searchList') }}">
+    
         <div class="form-group form-row">
             <select name="grade">
                 <option value="1">1年</option>

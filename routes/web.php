@@ -17,7 +17,7 @@ Route::post('/attendances_export', 'AttendanceController@export')->name('export'
 
 //欠席連絡入力
 Route::resource('attendance', 'AttendanceController');
-Route::get('attendance/search', 'AttendanceController@search')->name('attendance.search');
+Route::get('attendances/search', 'AttendanceController@search')->name('attendances.search');
 //名簿エディット
 Route::resource('/admin', 'AdminController');
 

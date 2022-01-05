@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Student;
-
+use App\Attendance;
 
 class SearchService {
     
@@ -15,4 +15,29 @@ class SearchService {
         
         return $students;
     }
+    
+    public function searchAttendances($request)
+    {
+        $date = $request->date;
+        $grade = $request->grade;
+        $class = $request->class;
+        
+        $query = Attendance::query();
+        $query->where('user_id','=', \Auth::id());
+        $query->join('students', 'attendances.student_id', '=', 'students.id');
+        // if( $date !== '' ){
+        //     $query->where('date', $date);
+        // }
+        // if( $grade !== ''){
+        //     $query->where('grade', $grade);
+        // }
+        // if( $class !== ''){
+        //     $query->where('class', $class);
+        // }
+        $attendances = $query->get();
+        
+        return $attendances;
+
+    }
+
 }
