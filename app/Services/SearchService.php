@@ -18,25 +18,21 @@ class SearchService {
     
     public function searchAttendances($request)
     {
-        $date = $request->date;
-        $grade = $request->grade;
-        $class = $request->class;
-        
-        $query = Attendance::query();
-        $query->where('user_id','=', \Auth::id());
-        $query->join('students', 'attendances.student_id', '=', 'students.id');
-        // if( $date !== '' ){
-        //     $query->where('date', $date);
-        // }
-        // if( $grade !== ''){
-        //     $query->where('grade', $grade);
-        // }
-        // if( $class !== ''){
-        //     $query->where('class', $class);
-        // }
-        $attendances = $query->get();
-        
-        return $attendances;
+        $date = $request->input('date');
+        $grade = $request->input('grade');
+        $class = $request->input('class');
+  
+        $attendances = Attendance::attendancesAllData();
+        if( $date !== '' ){
+            $attendances->where('date', $date);
+        }
+        if( $grade !== ''){
+            $attendances->where('grade', $grade);
+        }
+        if( $class !== ''){
+            $attendances->where('class', $class);
+        }
+        return $attendances->get();
 
     }
 

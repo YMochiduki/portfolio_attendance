@@ -7,7 +7,7 @@
             
                 <label>
                     欠課・欠席日
-                    <input type="date" name="date">
+                    <input type="date" name="date" value="@php echo date('Y-m-d') @endphp">
                 </label>
             
                 <label>
@@ -40,14 +40,14 @@
     </form>
 </div>
 
-{{--
+
 @php
     $action = explode('@',Route::getCurrentRoute()->getActionName())[1]
 @endphp
-@if($action==='index')
+@if($action==='edit')
     <p>条件を設定して検索してください。</p>
 @else
---}}
+
 
     <table class="table">
         <thead class="thead-dark">
@@ -168,7 +168,7 @@
             <p>条件に一致する欠課・欠席はありません。</p>
         @endforelse
     </table>
-{{--
+
 @endif
---}}
+
 @endsection

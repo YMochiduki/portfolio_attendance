@@ -32,43 +32,32 @@ class AttendanceController extends Controller
     
     public function search(Request $request, SearchService $service)
     {
+        // $attendances = $service->searchAttendances($request);
 
-        $attendances = $service->searchAttendances($request);
-        return $attendances;
-        
         $date = $request->input('date');
         $grade = $request->input('grade');
         $class = $request->input('class');
+        $attendances = Attendance::attendancesAllData();
         
-        $attendances = Attendance::all()->where('user_id','=',\Auth::id())
-            ->join('students', 'attendances.student_id', '=', 'students.id');
-        
-        // return $attendances;
-        
-        if($date !== ''){
-            $attendances = $attendances->where('date' ,'=', $date);
+        if( $date != '' ){
+            $attendances->where('date', '=', $date);
+        } 
+        if( $grade != ''){
+            $attendances->where('grade', '=',  $grade);
         }
-        if($grade !== ''){
-            $attendances = $attendances->where($attendances->student->grade, '=', $grade);
+        if( $class != ''){
+            $attendances->where('class', '=',  $class);
         }
-
-
         
-        // $search = $request->search;
-        // if($search !== null){
-        //     $query = Attendance::query()->join('users', 'user_id', '=', 'user.id');
-        //     $query->orwhere('attendances.date', '=', $search->date ); 
-        // }
-        // $attendance = Attendance::where('user_id', \Auth::id())
-        // $attendances = $query;
+
         return view('attendance.record',[
-            'attendances' => $attendances
+            'attendances' => $attendances->get()
         ]);
     }
 
     public function create()
-    {
-        $attendances = Attendance::all()->where('user_id','=',\Auth::id());
+    {   
+        $attendances = Attendance::attendancesAllData()->get();
         return view('attendance.record',[
             'attendances' => $attendances
         ]);
@@ -84,8 +73,6 @@ class AttendanceController extends Controller
                 'contact',
                 'reason',
             ]);
-        $data["user_id"]=\Auth::user()->id;
-    
         Attendance::create($data);
         
         return back();

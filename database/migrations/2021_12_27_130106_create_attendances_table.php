@@ -10,7 +10,6 @@ class CreateAttendancesTable extends Migration
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('student_id');
             $table->date('date');
             $table->string('absence_time');
@@ -19,7 +18,6 @@ class CreateAttendancesTable extends Migration
             $table->text('reason');
             $table->timestamps();
             
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
         });
     }

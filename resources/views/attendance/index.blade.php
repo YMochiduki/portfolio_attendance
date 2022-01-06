@@ -68,7 +68,10 @@
                                 <div class="modal-body">
                                     <form method="post" action="{{ route('attendance.store') }}">
                                     @csrf
-                                        <input type="date" name="date" value="{{ old('date') }}">
+                                        <input type="date" name="date"
+                                            @if(old('date') !== null) value="{{old('date')}}"
+                                            @else value="@php echo date('Y-m-d') @endphp"
+                                            @endif >
                                         <div>
                                             <input type="radio" name="absence_time" value="欠課" @if(old('absence_time') === "欠課" )checked="checked" @endif
                                                         onclick="checkedTimeOff('arrival_time',this.checked);" >欠課
