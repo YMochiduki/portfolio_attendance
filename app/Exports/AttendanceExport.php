@@ -4,36 +4,43 @@ namespace App\Exports;
 
 use App\Attendance;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class AttendanceExport implements FromCollection
+class AttendanceExport implements FromCollection, WithHeadings
 {
 
     public function collection()
     {
-        // $attendances = Attendance::all()->where('user_id','=',\Auth::id());
-        // $attendances = Attendance::all()
-            // ->join('students','id','=','attendances.student_id')
-            // ->where('user_id','=',\Auth::id());
-        $attendances = Attendance::select([
-                'attendances.date',
-                'attendances.student_id',
-                'students.id',
-                'students.grade',
-                'students.class',
-                'students.number',
-                'students.name',
-                'attendances.absence_time',
-                'attendances.arrivaltime',
-                'attendances.contact',
-                'attendance.reason',
-            ])
-            ->from('attendances')
-            ->join('students','attendances.student_id', '=', 'students.id')->get();
-                
+        $attendances = Attendance::attendancesAllData()
+        ->select(
+            'attendances.created_at',
+            'date',
+            'grade',
+            'class',
+            'number',
+            'name',
+            'absence_time', 
+            'arrival_time', 
+            'contact', 
+            'reason'
+        )->get();
+
         return $attendances;
     }
-    public function headkings():array
+    
+    public function headings():array
     {
-        
+        return [
+            '入力日',
+            '欠席・欠課日',
+            '学年',
+            '組',
+            '出席番号',
+            '名前',
+            '欠席・欠課',
+            '欠課時間',
+            '連絡者',
+            '理由'
+        ];
     }
 }

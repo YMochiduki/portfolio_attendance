@@ -36,7 +36,7 @@
 <div>
     <form method="post" action="/attendances_export">
         @csrf
-        <input type="submit" value="生徒データダウンロード">
+        <input type="submit" value="欠課・欠席情報ダウンロード">
     </form>
 </div>
 
@@ -44,11 +44,9 @@
 @php
     $action = explode('@',Route::getCurrentRoute()->getActionName())[1]
 @endphp
-@if($action==='edit')
+@if($action==='create')
     <p>条件を設定して検索してください。</p>
 @else
-
-
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -83,7 +81,7 @@
             </td>
             <td>
                 {{ $attendance->absence_time }}<br>
-                @if($attendance->absence_time === "欠課")({{ $attendance->arrival_time }}までに到着)@endif
+                @if($attendance->absence_time === "欠課")({{ $attendance->arrival_time }}まで欠課)@endif
             </td>
             <td>
                 {{ $attendance->contact }}<br>
@@ -121,7 +119,7 @@
                                         </div>
                                         <div>
                                             <label>
-                                                到着予定時間：
+                                                欠課時間：
                                                 <select id="arrival_time" name="arrival_time">
                                                     <option value=""></option>
                                                     <option value="1限目" @if( $attendance->arrival_time === "1限目" )selected @endif>1限目</option>
@@ -130,7 +128,7 @@
                                                     <option value="4限目" @if( $attendance->arrival_time === "4限目" )selected @endif>4限目</option>
                                                     <option value="5限目" @if( $attendance->arrival_time === "5限目" )selected @endif>5限目</option>
                                                     <option value="6限目" @if( $attendance->arrival_time === "6限目" )selected @endif>6限目</option>
-                                                </select>までに到着予定
+                                                </select>まで欠課予定
                                             </label>
                                         </div>
                                         <div>

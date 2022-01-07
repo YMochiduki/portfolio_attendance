@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use App\Imports\StudentImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Student;
+use App\Http\Requests\StudentRequest;
 use App\Attendance;
 use App\Http\Requests\AttendanceRequest;
 use App\User;
 use App\Services\SearchService;
+
 
 class StudentsController extends Controller
 {
@@ -54,6 +56,21 @@ class StudentsController extends Controller
         return redirect()->action('StudentsController@index');
     }
     
+    public function store(StudentRequest $request)
+    {
+        $user_id = \Auth::id();
+        Student::create([
+            'user_id' => $user_id,
+            'year' => $request->year,
+            'grade' => $request->grade,
+            'class' => $request->class,
+            'number' => $request->number,
+            'name' => $request->name,
+        ]);
+        
+        return back();
+    }
+    
     public function update(Request $request,$id){
         $student = Student::find($id);
         $student->update($request->only([
@@ -67,12 +84,13 @@ class StudentsController extends Controller
         return back();
     }
     
-    public function destroyOne($id){
-        Student::where('id', 1)->delete();
+    public function destroy($id){
+        Student::where('id' ,'=', $id)->delete();
         return back();
     }
     
-    public function destroyMany(Request $request){
-        Product::where('id', 1)->delete();
+    public function destroyMany(){
+        Student::query()->delete();
+        return back();
     }
 }

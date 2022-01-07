@@ -1,15 +1,27 @@
 header {
     margin-bottom: 20px;
 }
-select {
-
-  /* styling */
+input, select{
   background-color: white;
   border: thin solid #777777;
   border-radius: 4px;
   line-height: 1.5em;
-  padding: 0.5em 2em 0.5em 1em;
-  margin:5px;
-  margin-right:10px;
+  padding: 0.5em;
+  margin: 5px;
+  margin-right: 10px;
+}
+.excel{
+  margin: 0px;
+  padding: 0em;
+  border: none;
+}
 
+.student-year {
+  width: 4em;
+}
+.student-edit {
+  width: 5em;
+}
+.student-name {
+  width: 10em;
 }

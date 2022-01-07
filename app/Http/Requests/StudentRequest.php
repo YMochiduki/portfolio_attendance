@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\User;
 
-
-class AttendanceRequest extends FormRequest
+class StudentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,12 +25,11 @@ class AttendanceRequest extends FormRequest
     public function rules()
     {
         return [
-            'date' => ['required'],
-            'student_id' => ['required'],
-            'absence_time' => ['required'],
-            'arrival_time' => ['required_if:absence_time,"欠課'],
-            'contact' => ['required'],
-            'reason' => ['required', 'max:200'],
+            'year' => ['required'],
+            'grade' => ['required', 'numeric', 'min:1', 'max:\Auth::user()->curriculum_year'],
+            'class' => ['required', 'numeric', 'min:1', 'max:\Auth::user()->class_count'],
+            'number' => ['required'],
+            'name' => ['required', 'max:255'],
         ];
     }
 }

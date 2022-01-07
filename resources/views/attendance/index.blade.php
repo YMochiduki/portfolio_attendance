@@ -29,7 +29,6 @@
                 <th>組</th>
                 <th>出席番号</th>
                 <th>名前</th>
-                <th>欠課・欠席</th>
                 <th>入力</th>
             </tr>
         </thead>
@@ -48,10 +47,6 @@
                 </td>
                 <td>
                     {{ $student->name }}
-                </td>
-                <td>
-                    
-                    {{-- $student->name --}}
                 </td>
                 <td>
                     <button class="btn btn-info" data-toggle="modal" data-target="#modal{{ $student->id }}">入力</button>
@@ -73,14 +68,15 @@
                                             @else value="@php echo date('Y-m-d') @endphp"
                                             @endif >
                                         <div>
-                                            <input type="radio" name="absence_time" value="欠課" @if(old('absence_time') === "欠課" )checked="checked" @endif
-                                                        onclick="checkedTimeOff('arrival_time',this.checked);" >欠課
-                                            <input type="radio" name="absence_time" value="欠席" @if(old('absence_time') === "欠席" )checked="checked" @endif>欠席
+                                            <label><input type="radio" name="absence_time" value="欠課" @if(old('absence_time') === "欠課" )checked="checked" @endif
+                                                        onClick="flg{{$student->id}}a(this.checked);"/>欠課</label>
+                                            <label><input type="radio" name="absence_time" value="欠席" @if(old('absence_time') === "欠席" )checked="checked" @endif
+                                                        onClick="flg{{$student->id}}b(this.checked);"/>欠席</label>
                                         </div>
                                         <div>
                                             <label>
-                                                到着予定時間：
-                                                <select id="arrival_time" name="arrival_time">
+                                                欠課時間：
+                                                <select id="flg{{$student->id}}" name="arrival_time" >
                                                     <option value=""></option>
                                                     <option value="1限目" @if(old('arrival_time') === "1限目" )selected @endif>1限目</option>
                                                     <option value="2限目" @if(old('arrival_time') === "2限目" )selected @endif>2限目</option>
@@ -88,7 +84,24 @@
                                                     <option value="4限目" @if(old('arrival_time') === "4限目" )selected @endif>4限目</option>
                                                     <option value="5限目" @if(old('arrival_time') === "5限目" )selected @endif>5限目</option>
                                                     <option value="6限目" @if(old('arrival_time') === "6限目" )selected @endif>6限目</option>
-                                                </select>までに到着予定
+                                                </select>まで欠課予定
+                                            <script>
+                                                function flg{{$student->id}}a(ischecked){
+                                                    if(ischecked == true){
+                                                        document.getElementById("flg{{$student->id}}").disabled = false;
+                                                    } else {
+                                                        document.getElementById("flg{{$student->id}}").disabled = true;
+                                                    }
+                                                }
+
+                                                function flg{{$student->id}}b(ischecked){
+                                                    if(ischecked == true){
+                                                        document.getElementById("flg{{$student->id}}").disabled = true;
+                                                    } else {
+                                                        document.getElementById("flg{{$student->id}}").disabled = false;
+                                                    }
+                                                }
+                                            </script>
                                             </label>
                                         </div>
                                         <div>
@@ -121,16 +134,5 @@
             <p>生徒情報はありません</p>
         @endforelse
     </table>
-<script>
-function checkedTimeOff(arrival_time ,ischecked){
-    if( ischecked == true ) {
-       // チェックが入っていたら有効化
-       document.getElementById(arrival_time).disabled = false;
-    }
-    else {
-       // チェックが入っていなかったら無効化
-       document.getElementById(arrival_time).disabled = true;
-    }
-}
-</script>
+
 @endsection

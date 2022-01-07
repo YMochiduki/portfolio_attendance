@@ -32,8 +32,6 @@ class AttendanceController extends Controller
     
     public function search(Request $request, SearchService $service)
     {
-        // $attendances = $service->searchAttendances($request);
-
         $date = $request->input('date');
         $grade = $request->input('grade');
         $class = $request->input('class');
@@ -94,6 +92,7 @@ class AttendanceController extends Controller
         
         $attendance->update($request->only([
             'date',
+            'student_id',
             'absence_time',
             'arrival_time',
             'contact',
