@@ -24,8 +24,6 @@
     </form>
     <a class="btn btn-outline-info" href="{{ route('students.index') }}">検索リセット</a>
 </div>
-
-<div>
     <button class="btn btn-info" data-toggle="modal" data-target="#modal">生徒新規登録</button>
 <div class="modal fade" id="modal">
     <div class="modal-dialog">
@@ -63,17 +61,26 @@
         </div>
     </div>
 </div>
-
+<div>
     <form method="post" action="/students_import" enctype="multipart/form-data">
         @csrf
         <input class="excel" type="file" name="excel_file" ><br>
         <input class="btn btn-info" type="submit" value="インポート">
     </form>
+</div>
+<div>
+    <form method="post" action="{{ route('students.ListStyleExport') }}">
+        @csrf
+        <input type="submit" value="名簿様式ダウンロード">
+    </form>
+</div>
+<div>
     <form method="post" action="{{ route('students.destroyMany') }}">
         @csrf
         @method('delete')
         <input class="btn btn-dark" type="submit" value="削除">
     </form>
+</div>
     
     <table class="table">
         <thead class="thead-dark">
@@ -91,28 +98,47 @@
         <tbody>
         @forelse($students as $student)
             <tr>
+                <td>
+                    {{ $student->year }}年
+                </td>
+                <td>
+                    {{ $student->grade }}年
+                </td>
+                <td>
+                    {{ $student->class }}組
+                </td>
+                <td>
+                    {{ $student->number }}番
+                </td>
+                <td>
+                    {{ $student->name }}
+                </td>
+                <td>
+                    <button class="btn btn-info" data-toggle="modal" data-target="#modal-E">編集</button>
+                    <button class="btn btn-info" data-toggle="modal" data-target="#modal-D">削除</button>
+                
                 <form method="POST" action="{{ route('students.update', $student->id) }}">
                 @csrf
                 @method('patch')
                     <td> 
-                        <input type="number" name="year" value="{{ $student->year }}" class="student-year">年度
+                        <input type="number" name="year" value="{{ $student->year }}" class="student-year">
                     </td>
                     <td>
                         <select name="grade" class="student-edit">
                             @for($i=1; $i <=$curriculum_year; $i++)
-                                <option value="{{ $i }}" @if($student->grade === $i )selected @endif>{{ $i }}年</option>    
+                                <option value="{{ $i }}" @if($student->grade === $i )selected @endif>{{ $i }}</option>    
                             @endfor
                         </select>
                     </td>
                     <td>
                         <select name="class" class="student-edit">
                             @for($i=1; $i <=$class_count; $i++)
-                                <option value="{{ $i }}" @if($student->class === $i )selected @endif>{{ $i }}組</option>    
+                                <option value="{{ $i }}" @if($student->class === $i )selected @endif>{{ $i }}</option>    
                             @endfor
                         </select>
                     </td>
                     <td>
-                        <input type="number" name="number" value="{{ $student->number }}"  class="student-edit">番
+                        <input type="number" name="number" value="{{ $student->number }}"  class="student-edit">
                     </td>
                     <td>
                         <input type="text" name="name" value="{{ $student->name }}"  class="student-name">
@@ -120,31 +146,29 @@
                     <td>
                         <input class="btn btn-info" type="submit" value="編集反映">
                     </td>
-                </form>                        
-                    <td>
-                        <button class="btn btn-info" data-toggle="modal" data-target="#modal-D">削除</button>
-                    </td>
-                <div class="modal fade" id="modal-D">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <p>{{ $student->grade }}年{{ $student->class }}組{{ $student->number }}{{ $student->name }}</p>
-                                <button class="close" data-dismiss="modal">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                </form>
+                        <div class="modal fade" id="modal-D">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <p>{{ $student->grade }}年{{ $student->class }}組{{ $student->number }}{{ $student->name }}</p>
+                                        <button class="close" data-dismiss="modal">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>生徒情報を削除を実行します。</p>
+                                        <p>生徒情報を削除を実行すると、欠課欠席の記録も削除されます。</p>
+                                    </div>
+                                <form method="post" action="{{ route('students.destroy',$student->id) }}">
+                                    @csrf
+                                    @method('delete')
+                                    <input class="btn btn-dark" type="submit" value="削除">
+                                </form>
+                                </div>
                             </div>
-                            <div class="modal-body">
-                                <p>生徒情報を削除を実行します。</p>
-                                <p>生徒情報を削除を実行すると、欠課欠席の記録も削除されます。</p>
-                            </div>
-                        <form method="post" action="{{ route('students.destroy',$student->id) }}">
-                            @csrf
-                            @method('delete')
-                            <input class="btn btn-dark" type="submit" value="削除">
-                        </form>
                         </div>
-                    </div>
-                </div>
+                    </td>
             </tr>
         </tbody>
         @empty

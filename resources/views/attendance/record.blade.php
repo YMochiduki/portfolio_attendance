@@ -112,15 +112,15 @@
                                     @method('patch')
                                         <input type="date" name="date" value={{ $attendance->date }}>
                                         <div>
-                                            <input type="radio" name="absence_time" value="欠課" @if($attendance->absence_time === "欠課") checked="checked" @endif
-                                                onclick="checkedTimeOff('arrival_time',this.checked);" >欠課
-                                            <input type="radio" name="absence_time" value="欠席" @if($attendance->absence_time === "欠席" ) checked="checked" @endif>欠席
-                                
+                                            <label><input type="radio" name="absence_time" value="欠課" @if($attendance->absence_time === "欠課") checked="checked" @endif
+                                                onClick="flg{{$attendance->id}}a(this.checked);"/>欠課</label>
+                                            <input type="radio" name="absence_time" value="欠席" @if($attendance->absence_time === "欠席" ) checked="checked" @endif
+                                                onClick="flg{{$attendance->id}}b(this.checked);"/>欠席</label>
                                         </div>
                                         <div>
                                             <label>
                                                 欠課時間：
-                                                <select id="arrival_time" name="arrival_time">
+                                                <select id="flg{{$attendance->id}}" name="arrival_time">
                                                     <option value=""></option>
                                                     <option value="1限目" @if( $attendance->arrival_time === "1限目" )selected @endif>1限目</option>
                                                     <option value="2限目" @if( $attendance->arrival_time === "2限目" )selected @endif>2限目</option>
@@ -129,6 +129,23 @@
                                                     <option value="5限目" @if( $attendance->arrival_time === "5限目" )selected @endif>5限目</option>
                                                     <option value="6限目" @if( $attendance->arrival_time === "6限目" )selected @endif>6限目</option>
                                                 </select>まで欠課予定
+                                            <script>
+                                                function flg{{$attendance->id}}a(ischecked){
+                                                    if(ischecked == true){
+                                                        document.getElementById("flg{{$attendance->id}}").disabled = false;
+                                                    } else {
+                                                        document.getElementById("flg{{$attendance->id}}").disabled = true;
+                                                    }
+                                                }
+
+                                                function flg{{$attendance->id}}b(ischecked){
+                                                    if(ischecked == true){
+                                                        document.getElementById("flg{{$attendance->id}}").disabled = true;
+                                                    } else {
+                                                        document.getElementById("flg{{$attendance->id}}").disabled = false;
+                                                    }
+                                                }
+                                            </script>
                                             </label>
                                         </div>
                                         <div>

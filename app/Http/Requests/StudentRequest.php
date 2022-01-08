@@ -25,11 +25,11 @@ class StudentRequest extends FormRequest
     public function rules()
     {
         return [
-            'year' => ['required'],
-            'grade' => ['required', 'numeric', 'min:1', 'max:\Auth::user()->curriculum_year'],
-            'class' => ['required', 'numeric', 'min:1', 'max:\Auth::user()->class_count'],
-            'number' => ['required'],
-            'name' => ['required', 'max:255'],
+            'year' => 'required',
+            'grade' => 'required|integer|min:1|max:{\Auth::user()->curriculum_year}',
+            'class' => 'required', 'numeric', 'min:1', 'max:{\Auth::user()->class_count}',
+            'number' => 'required', 'numeric',
+            'name' => 'required', 'max:255'
         ];
     }
 }

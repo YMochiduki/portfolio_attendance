@@ -25,7 +25,7 @@ class AttendanceController extends Controller
     public function index()
     {
         $students = Student::all()->where('user_id' ,'=' ,\Auth::id());
-        return view('attendance.index',[
+        return view('attendance.search_form',[
             'students' =>$students,
         ]);
     }
@@ -75,17 +75,7 @@ class AttendanceController extends Controller
         
         return back();
     }
-
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        
-    }
-
+    
     public function update(AttendanceRequest $request, $id)
     {
         $attendance = Attendance::find($id);
@@ -104,8 +94,7 @@ class AttendanceController extends Controller
 
     public function destroy($id)
     {
-        $attendance = Attendance::find($id);
-        $attendance->delete();
+        Attendance::find($id)->delete();
         return back();
     }
     

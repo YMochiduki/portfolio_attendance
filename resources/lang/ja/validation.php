@@ -145,6 +145,21 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => '名前',
+        'email' => 'メールアドレス',
+        'password' => 'パスワード',
+        'curriculum_year' => '学年数',
+        'class_count' => 'クラス数',
+        'year' => '年度',
+        'grade' => '学年',
+        'class' => 'クラス',
+        'number' => '出席番号',
+        'date' => '欠課・欠席日',
+        'absence_time' => '欠課・欠席',
+        'arrival_time' => '結果時間',
+        'contact' => '連絡者',
+        'reason' => '理由',
+        ],
 
 ];

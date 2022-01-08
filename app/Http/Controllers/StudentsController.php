@@ -11,7 +11,7 @@ use App\Attendance;
 use App\Http\Requests\AttendanceRequest;
 use App\User;
 use App\Services\SearchService;
-
+use App\Exports\StudentListExport;
 
 class StudentsController extends Controller
 {
@@ -23,7 +23,7 @@ class StudentsController extends Controller
     public function index()
     {
         $students = Student::all()->where('user_id' ,'=' ,\Auth::id());
-        return view('student.index',[
+        return view('student.search_form',[
             'students' =>$students
         ]);
     }
@@ -32,7 +32,7 @@ class StudentsController extends Controller
     public function search(Request $request, SearchService $service){
         $request->validate(['search' => ['require']]);
         $students = $service->searchStudents($request);
-        return view('attendance.index',[
+        return view('attendance.search_form',[
             'students' =>$students
         ]);
     }
@@ -40,7 +40,7 @@ class StudentsController extends Controller
     public function searchList(Request $request, SearchService $service){
         $request->validate(['search' => ['require']]);
         $students = $service->searchStudents($request);
-        return view('student.index',[
+        return view('student.search_form',[
             'students' =>$students
         ]);
     }
@@ -50,10 +50,12 @@ class StudentsController extends Controller
         
         $excel_file = $request->file('excel_file');
         $excel_file->store('excels');
-        // return var_dump($excel_file);
-        
         Excel::import(new StudentImport, $excel_file);
         return redirect()->action('StudentsController@index');
+    }
+    
+    public function studentsListStyleExport(){
+        return Excel::download(new StudentListExport, '生徒名簿様式.xlsx');
     }
     
     public function store(StudentRequest $request)
@@ -71,7 +73,7 @@ class StudentsController extends Controller
         return back();
     }
     
-    public function update(Request $request,$id){
+    public function update(StudentRequest $request,$id){
         $student = Student::find($id);
         $student->update($request->only([
                 'year',
@@ -85,7 +87,7 @@ class StudentsController extends Controller
     }
     
     public function destroy($id){
-        Student::where('id' ,'=', $id)->delete();
+        Student::find($id)->delete();
         return back();
     }
     

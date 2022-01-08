@@ -6,20 +6,22 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::get('/students.index', 'StudentsController@index')->name('students.index');
 Route::resource('students', 'StudentsController')->only([
         'index', 'store','update', 'destroy'
     ]);
-Route::post('/students_import','StudentsController@import');
+Route::post('students_import','StudentsController@import');
+Route::post('studentsListStyle_export', 'StudentsController@studentsListStyleExport')->name('students.ListStyleExport');
 Route::get('students/search', 'StudentsController@search')->name('students.search');
 Route::get('students/searchList', 'StudentsController@searchList')->name('students.searchList');
 Route::delete('students', 'StudentsController@destroyMany')->name('students.destroyMany');
-Route::post('/attendances_export', 'AttendanceController@export')->name('export');
 
-//欠席連絡入力
-Route::resource('attendance', 'AttendanceController');
+
+Route::resource('attendance', 'AttendanceController')->only([
+        'index', 'create', 'store', 'update', 'destroy'
+    ]);
+Route::post('attendances_export', 'AttendanceController@export')->name('export');
 Route::get('attendances/search', 'AttendanceController@search')->name('attendances.search');
 //名簿エディット
-Route::resource('/admin', 'AdminController');
+// Route::resource('/admin', 'AdminController');
 
 

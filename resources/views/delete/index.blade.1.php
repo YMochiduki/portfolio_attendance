@@ -6,16 +6,18 @@
     @csrf
         <div class="form-group form-row">
             <select name="grade">
-                <option value="1">1年</option>
-                <option value="2">2年</option>
-                <option value="3">3年</option>
+                @php $curriculum_year = Auth::user()->curriculum_year @endphp
+                @for($i=1; $i <= $curriculum_year; $i++)
+                <option value="{{ $i }}">{{ $i }}年</option>    
+                @endfor
             </select>
         </div>
         <div class="form-group">
             <select name="class">
-                <option value="1">1組</option>
-                <option value="2">2組</option>
-                <option value="3">3組</option>
+                @php $class_count = Auth::user()->class_count @endphp
+                @for($i=1; $i <= $class_count; $i++)
+                    <option value="{{ $i }}">{{ $i }}組</option>    
+                @endfor
             </select>
         </div>
             <input class="btn btn-info" type="submit" value="検索">
@@ -49,9 +51,9 @@
                     {{ $student->name }}
                 </td>
                 <td>
-                    <button class="btn btn-info" data-toggle="modal" data-target="#modal{{ $student->id }}">入力</button>
+                    <button class="btn btn-info" data-toggle="modal" data-target="#modal{{ $student->id }}Edit">入力</button>
             
-                    <div class="modal fade" id="modal{{ $student->id }}">
+                    <div class="modal fade" id="modal{{ $student->id }}" id="modal{{ $student->id }}Edit">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
