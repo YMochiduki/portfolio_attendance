@@ -25,7 +25,7 @@ class AttendanceController extends Controller
     public function index()
     {
         $students = Student::all()->where('user_id' ,'=' ,\Auth::id());
-        return view('attendance.search_form',[
+        return view('layouts.students_list',[
             'students' =>$students,
         ]);
     }

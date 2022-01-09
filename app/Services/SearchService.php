@@ -9,11 +9,21 @@ class SearchService {
     
     public function searchStudents($request)
     {
-        $students = '';
-        $search = $request->search;
-        $students = Student::where('grade', $request->grade)->where('class', $request->class)->get();
+        $year = $request->year;
+        $grade = $request->grade;
+        $class = $request->class;
+        $students = Student::where('user_id','=', \Auth::id());
         
-        return $students;
+        if( $year !== null){
+            $students->where('year', $year);
+        }
+        if( $grade !== null){
+            $students->where('grade', $grade);
+        }
+        if( $class !== null){
+            $students->where('class', $class);
+        }
+        return $students->get();
     }
     
     public function searchAttendances($request)

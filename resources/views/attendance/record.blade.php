@@ -3,35 +3,32 @@
 <div>
     <form method="GET" action="{{ route('attendances.search') }}">
         @csrf
-        <div>
+            <label>
+                欠課・欠席日
+                <input type="date" name="date" value="@php echo date('Y-m-d') @endphp">
+            </label>
             
-                <label>
-                    欠課・欠席日
-                    <input type="date" name="date" value="@php echo date('Y-m-d') @endphp">
-                </label>
-            
-                <label>
-                    <select name="grade">
-                        <option value=""></option>
-                    @for($i=1; $i <= 3; $i++)
-                        <option value="{{ $i }}">{{ $i }}</option>    
-                    @endfor
-                    </select>
-                    学年
-                </label>
-                <label>
-                    <select name="class">
-                        <option value=""></option>
-                    @for($i=1; $i <= 3; $i++)
-                        <option value="{{ $i }}">{{ $i }}</option>    
-                    @endfor
-                    </select>
-                    組
-                </label>
-        </div>
+            <label>
+                学年
+                <select name="grade">
+                    <option value=""></option>
+                @for($i=1; $i <= 3; $i++)
+                    <option value="{{ $i }}">{{ $i }}</option>    
+                @endfor
+                </select>
+            </label>
+            <label>
+                組
+                <select name="class">
+                    <option value=""></option>
+                @for($i=1; $i <= 3; $i++)
+                    <option value="{{ $i }}">{{ $i }}</option>    
+                @endfor
+                </select>
+            </label>
             <input class="btn btn-info" type="submit" value="検索">
         </form>
-            <a class="btn btn-outline-info" href="{{ route('attendance.create') }}">検索リセット</a>
+        <a class="btn btn-outline-info" href="{{ route('attendance.create') }}">検索リセット</a>
 </div>
 <div>
     <form method="post" action="/attendances_export">

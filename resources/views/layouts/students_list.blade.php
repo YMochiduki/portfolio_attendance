@@ -1,20 +1,65 @@
 @extends('layouts.logged_in')
 @section('content')
+@php
+    $action = Request::route()->getName()
+@endphp
+
+<div>
+    <form class="form-inline" method="GET" 
+            @if($action==='attendance.index' || $action==='students.search')
+                action="{{ route('students.search') }}">
+            @else
+                action="{{ route('students.searchList') }}">
+            @endif
+        <div class="form-group form-row">
+            <label>
+                <input type="number" name="year">年度
+                <select name="grade">
+                    @php $curriculum_year = Auth::user()->curriculum_year @endphp
+                        <option valus=""></option>
+                    @for($i=1; $i <= $curriculum_year; $i++)
+                        <option value="{{ $i }}">{{ $i }}</option>    
+                    @endfor
+                </select>
+                年
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                <select name="class">
+                    <option valus=""></option>
+                @php $class_count = Auth::user()->class_count @endphp
+                @for($i=1; $i <= $class_count; $i++)
+                    <option value="{{ $i }}">{{ $i }}</option>    
+                @endfor
+                </select>
+                組
+            </label>
+        </div>
+        <input class="btn btn-info" type="submit" value="検索">
+    </form>
+    <a class="btn btn-outline-info" 
+        @if($action==='attendance.index' || $action==='students.search')
+            href="{{ route('attendance.index') }}">検索リセット</a>
+        @else
+            href="{{ route('students.index') }}">検索リセット</a>
+        @endif
+        
+</div>
+
 
 @yield('search_form')
 
     <table class="table">
         <thead class="thead-dark">
             <tr>
+                <th>年度</th>
                 <th>学年</th>
                 <th>組</th>
                 <th>出席番号</th>
                 <th>名前</th>
                 <th>
-                @php
-                    $action = Request::route()->getName()
-                @endphp
-                @if($action==='attendance.index'|| $action==='students.search')
+                @if($action==='attendance.index' || $action==='students.search')
                     入力
                 @else
                     編集・削除
@@ -26,6 +71,9 @@
             
         @forelse($students as $student)
             <tr>
+                <td>
+                    {{ $student->year }}年度
+                </td>
                 <td>
                     {{ $student->grade }}年
                 </td>

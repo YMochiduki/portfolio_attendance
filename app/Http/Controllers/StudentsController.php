@@ -32,8 +32,8 @@ class StudentsController extends Controller
     public function search(Request $request, SearchService $service){
         $request->validate(['search' => ['require']]);
         $students = $service->searchStudents($request);
-        return view('attendance.search_form',[
-            'students' =>$students
+        return view('layouts.students_list',[
+            'students' => $students
         ]);
     }
 
@@ -41,7 +41,7 @@ class StudentsController extends Controller
         $request->validate(['search' => ['require']]);
         $students = $service->searchStudents($request);
         return view('student.search_form',[
-            'students' =>$students
+            'students' => $students
         ]);
     }
     

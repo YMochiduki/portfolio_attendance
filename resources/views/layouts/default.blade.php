@@ -21,8 +21,8 @@
             {{-- エラーメッセージを出力 --}}
             @if($errors->all() !== [])
                 <div class="error">
-                <p>【Attention】<br>フォームの送信内容に不備があります。入力内容は保存されていません。<br>入力内容を確認してください。</p>
-                <ul>
+                <p>【Attention】<br>エラーがあります。入力内容は保存されていません。<br>フォームの入力内容を確認してください。</p>
+                <ul class="list-unstyled">
                     @foreach($errors->all() as $error)
                             <li class="error-detail">{{ $error }}</li>
                     @endforeach
