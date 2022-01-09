@@ -19,6 +19,8 @@
         <li><a href={{ route('attendance.index') }}>欠課・欠席入力</a></li>
         <li><a href={{ route('attendance.create') }}>欠課・欠席履歴</a></li>
         <li><a href={{ route('students.index') }}>名簿操作</a></li>
+        <li><a href={{ route('user.index') }}>学校情報</a></li>
+        <li><a href={{-- route('students.index') --}}>使用方法</a></li>
       </ul>
     </div>
   </nav>

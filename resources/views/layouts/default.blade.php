@@ -19,9 +19,16 @@
     <header class="offset-1 col-10">
             @yield('header')
             {{-- エラーメッセージを出力 --}}
-            @foreach($errors->all() as $error)
-                <p class="error">{{ $error }}</p>
-            @endforeach 
+            @if($errors->all() !== [])
+                <div class="error">
+                <p>【Attention】<br>フォームの送信内容に不備があります。入力内容は保存されていません。<br>入力内容を確認してください。</p>
+                <ul>
+                    @foreach($errors->all() as $error)
+                            <li class="error-detail">{{ $error }}</li>
+                    @endforeach
+                </ul>
+                </div>
+            @endif
             {{-- 成功メッセージを出力 --}}
             @if (session()->has('success'))
                 <div class="success">
@@ -37,9 +44,7 @@
         </div>
         <div class="col-sm-2 col-10 order-1 order-sm-2 right_menu">
             @yield('right_menu')
-    
         </div>
-
     </div>
 
 </body>

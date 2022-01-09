@@ -18,11 +18,11 @@ class StudentListExport implements FromCollection, WithHeadings
         public function headings():array
     {
         return [
-            '年度',
-            '学年',
-            '組',
-            '出席番号',
-            '名前',
+            'year',
+            'grade',
+            'class',
+            'number',
+            'name',
         ];
     }
 }

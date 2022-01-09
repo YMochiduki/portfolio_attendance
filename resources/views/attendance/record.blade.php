@@ -63,6 +63,9 @@
         <tbody>
             
         @forelse($attendances as $attendance)
+    {{--     @php
+            var_dump($attendance);
+        @endphp--}}
         <tr>
             <td>
                 {{ $attendance->date }}
@@ -112,15 +115,15 @@
                                     @method('patch')
                                         <input type="date" name="date" value={{ $attendance->date }}>
                                         <div>
-                                            <label><input type="radio" name="absence_time" value="欠課" @if($attendance->absence_time === "欠課") checked="checked" @endif
+                                            <label><input type="radio" name="absence_time" value="欠課" @if($attendance->absence_time === "欠課") checked="checked"@endif
                                                 onClick="flg{{$attendance->id}}a(this.checked);"/>欠課</label>
-                                            <input type="radio" name="absence_time" value="欠席" @if($attendance->absence_time === "欠席" ) checked="checked" @endif
+                                            <input type="radio" name="absence_time" value="欠席" @if($attendance->absence_time === "欠席" ) checked="checked"@endif
                                                 onClick="flg{{$attendance->id}}b(this.checked);"/>欠席</label>
                                         </div>
                                         <div>
                                             <label>
                                                 欠課時間：
-                                                <select id="flg{{$attendance->id}}" name="arrival_time">
+                                                <select id="flg{{$attendance->id}}" name="arrival_time" @if($attendance->absence_time === "欠席" ) disabled  @endif>
                                                     <option value=""></option>
                                                     <option value="1限目" @if( $attendance->arrival_time === "1限目" )selected @endif>1限目</option>
                                                     <option value="2限目" @if( $attendance->arrival_time === "2限目" )selected @endif>2限目</option>

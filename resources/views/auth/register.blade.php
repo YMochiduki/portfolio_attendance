@@ -19,7 +19,7 @@
         </div>
         <div>
             <label>
-                クラス数（１学年あたり）：
+                クラス数（１学年あたり最大数）：
                 <input type="number" name="class_count">
             </label>
         </div>                

@@ -12,8 +12,8 @@ class Attendance extends Model
       $query = Attendance::query();
       $query->where('user_id','=', \Auth::id());
       $query->join('students', 'attendances.student_id', '=', 'students.id');
-
-        return $query;
+      $query->select('*','attendances.id');
+      return $query;
     }
 
     public function student(){

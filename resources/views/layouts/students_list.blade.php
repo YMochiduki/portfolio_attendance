@@ -14,7 +14,7 @@
                 @php
                     $action = Request::route()->getName()
                 @endphp
-                @if($action==='attendance.index')
+                @if($action==='attendance.index'|| $action==='students.search')
                     入力
                 @else
                     編集・削除
@@ -39,17 +39,14 @@
                     {{ $student->name }}
                 </td>
                 <td>
-                @php
-                    $action = Request::route()->getName()
-                @endphp
-                @if($action==='attendance.index')
+                @if($action==='attendance.index' || $action==='students.search')
                     <button class="btn btn-info" data-toggle="modal" data-target="#modal{{ $student->id }}">入力</button>
                 @else
                     <button class="btn btn-info" data-toggle="modal" data-target="#modal{{ $student->id }}Edit">編集</button>
                     <button class="btn btn-dark" data-toggle="modal" data-target="#modal{{ $student->id }}Delete">削除</button>
                 @endif
 
-                @if($action==='attendance.index')        
+                @if($action==='attendance.index'|| $action==='students.search')        
                     <!--欠課・欠席入力フォーム-->
                     <div class="modal fade" id="modal{{ $student->id }}">
                         <div class="modal-dialog">
@@ -153,7 +150,7 @@
                                                     <option value="{{ $i }}" @if($student->class === $i )selected @endif>{{ $i }}組</option>    
                                                 @endfor
                                             </select>
-                                        </div
+                                        </div>
                                         <div>
                                             <label>
                                                 出席番号<input type="number" name="number" value="{{ $student->number }}">番

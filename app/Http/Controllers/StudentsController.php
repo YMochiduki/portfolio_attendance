@@ -28,7 +28,7 @@ class StudentsController extends Controller
         ]);
     }
     
-
+    
     public function search(Request $request, SearchService $service){
         $request->validate(['search' => ['require']]);
         $students = $service->searchStudents($request);

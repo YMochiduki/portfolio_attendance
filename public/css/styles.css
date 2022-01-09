@@ -16,12 +16,16 @@ input, select{
   border: none;
 }
 
-.student-year {
-  width: 4.5em;
+.error {
+  border: thin solid #777777;
+  background-color: #D6D7D8;
+  width: 75%;
 }
-.student-edit {
-  width: 5em;
+
+.error-detail {
+  color: red;
 }
-.student-name {
-  width: 10em;
+
+.school-table {
+  width: 60%;
 }

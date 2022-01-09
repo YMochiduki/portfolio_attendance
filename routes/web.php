@@ -22,6 +22,7 @@ Route::resource('attendance', 'AttendanceController')->only([
 Route::post('attendances_export', 'AttendanceController@export')->name('export');
 Route::get('attendances/search', 'AttendanceController@search')->name('attendances.search');
 //名簿エディット
-// Route::resource('/admin', 'AdminController');
+Route::get('user', 'UserController@index')->name('user.index');
+Route::patch('user','UserController@update')->name('user.update');
 
 
