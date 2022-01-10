@@ -25,7 +25,7 @@ class StudentRequest extends FormRequest
     public function rules()
     {
         return [
-            'year' => ['required'],
+            'year' => ['required', 'numeric'],
             'grade' => ['required','numeric'],
             'class' => ['required', 'numeric', 'min:1'],
             'number' => ['required', 'numeric'],

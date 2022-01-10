@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="row">
-    <header class="offset-1 col-10">
+    <div class="offset-sm-1 col-10">
             @yield('header')
             {{-- エラーメッセージを出力 --}}
             @if($errors->all() !== [])
@@ -35,14 +35,14 @@
                     {{ session()->get('success') }}
                 </div>
             @endif
-    </header>
+    </div>
 </div>
 
     <div class="row offset-1">
-        <div class="col-sm-9 col-10  order-2 order-sm-1">
+        <div class="col-sm-9 col-10  order-2 order-sm-1 content">
             @yield('content')
         </div>
-        <div class="col-sm-2 col-10 order-1 order-sm-2 right_menu">
+        <div class="col-sm-2 col-10 order-1 order-sm-2 right-menu">
             @yield('right_menu')
         </div>
     </div>

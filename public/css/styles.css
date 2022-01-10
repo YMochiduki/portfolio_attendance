@@ -1,5 +1,69 @@
 header {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
+}
+body {
+  min-width: 450px;
+}
+
+.date {
+  width: 8em;
+}
+.grade {
+  width: 4em;
+}
+.class {
+  width: 4em;
+}
+.number {
+  width: 6em;
+}
+.name {
+  min-width: 10em;
+}
+.absence_time {
+  min-width: 9em;
+}
+.contact {
+  min-width: 5em;
+}
+.year {
+  width: 6em;
+}
+.button {
+  min-width: 7em;
+}
+
+.form-year {
+  width: 5em;
+}
+.form-number {
+  width: 5em;
+}
+
+.content {
+  margin-left:10px;
+}
+
+.title {
+  padding: 20px;
+  color: white;
+}
+
+.navbar{
+  padding: 0px;
+}
+
+.right-menu {
+  padding: 0px;
+}
+.right-menu li a{
+  width: 9em;
+  margin-bottom: 5px;
+}
+.right-menu li form input{
+  margin: 0px;
+  width: 9em;
+  margin-bottom: 5px;
 }
 
 input, select{
@@ -10,6 +74,10 @@ input, select{
   padding: 0.5em;
   margin: 5px;
   margin-right: 10px;
+}
+
+button {
+  display:inline-block;
 }
 .excel{
   margin: 0px;
@@ -29,4 +97,54 @@ input, select{
 
 .school-table {
   width: 60%;
+}
+
+
+.school-dada {
+  width: 90%;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.school-dada dt {
+  border-bottom: 1px dotted #ccc; 
+}
+.school-dada dt, dd {
+  border-bottom: 1px dotted #ccc; 
+  margin-bottom: 0px;
+}
+
+h5 {
+  padding: 0.5em;
+  background: #eaf3ff;
+  border-left: double 8px #17a2b8;
+  box-shadow: 0 0 4px #d7d7d7;
+}
+
+h6 {
+  padding: 0.5rem 1rem;
+  border-left: 6px solid #17a2b8;
+  border-bottom: solid 3px #d7d7d7;
+}
+
+.explanation {
+ width: 100%;
+ border-collapse: collapse;
+ border-spacing: 0;
+}
+.explanation th {
+ padding: 10px;
+ background: #e9faf9;
+ border: solid 1px #778ca3;
+}
+.explanation td {
+ padding: 10px;
+ border: solid 1px #778ca3;
+}
+
+.description-head {
+ border-bottom: solid 1px #778ca3;
+}
+.description {
+  padding-left: 1em;
 }

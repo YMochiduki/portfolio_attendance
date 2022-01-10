@@ -44,25 +44,23 @@
 @if($action==='create')
     <p>条件を設定して検索してください。</p>
 @else
+<div class="table-responsive">
     <table class="table">
         <thead class="thead-dark">
         <tr>
             <tr>
-                <th>欠課・欠席日</th>
-                <th>学年</th>
-                <th>組</th>
-                <th>出席番号</th>
-                <th>名前</th>
-                <th>欠課・欠席</th>
-                <th>連絡者</th>
+                <th class="date">欠課・欠席日</th>
+                <th class='grade'>学年</th>
+                <th class="class">組</th>
+                <th class="number">出席番号</th>
+                <th class="name">名前</th>
+                <th class="absence_time">欠課・欠席</th>
+                <th class="contact">連絡者</th>
             </tr>
         </thead>
         <tbody>
             
         @forelse($attendances as $attendance)
-    {{--     @php
-            var_dump($attendance);
-        @endphp--}}
         <tr>
             <td>
                 {{ $attendance->date }}
@@ -94,9 +92,6 @@
             </td>
             <td>
                 <button class="btn btn-info" data-toggle="modal" data-target="#modal{{ $attendance->id }}">編集</button>
-            </td>
-        </tr>
-    
                     <div class="modal fade" id="modal{{ $attendance->id }}">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -176,14 +171,14 @@
                             </div>
                         </div>
                     </div>
-                </td>
+            </td>
         </tr>
         </tbody>
         @empty
             <p>条件に一致する欠課・欠席はありません。</p>
         @endforelse
     </table>
-
+</div>
 @endif
 
 @endsection

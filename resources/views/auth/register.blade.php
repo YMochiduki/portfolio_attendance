@@ -1,50 +1,67 @@
 @extends('layouts.not_logged_in')
 
 @section('content')
-    <h1>ユーザー登録</h1>
-    
+<dl class="row">
     <form method="POST" action="{{ route('register') }}">
         @csrf
         <div>
-            <label>
-                学校名：
+        <label>
+            <dh>
+                学校名
+            </dh>
+            <dd>
                 <input type="text" name="name" value="{{ old('name') }}" placeholder="〇〇〇学校">
-            </label>
+            </dd>
+        </label>
+
+        <label>
+            <dh>
+                学年数
+            </dh>
+            <dd>
+                <input type="number" name="curriculum_year" value="{{ old('curriculum_year') }}">
+            </dd>
+        </label>
+
+        <label>
+            <dh>
+                クラス数（１学年あたり最大数）
+            </dh>
+            <dd>
+                <input type="number" name="class_count" value="{{ old('class_count') }}">
+            </dd>
+        </label>
         </div>
         <div>
-            <label>
-                学年数：
-                <input type="number" name="curriculum_year">
-            </label>
-        </div>
-        <div>
-            <label>
-                クラス数（１学年あたり最大数）：
-                <input type="number" name="class_count">
-            </label>
-        </div>                
-        <div>
-            <label>
-                メールアドレス：
+        <label>
+            <dh>
+                メールアドレス
+            </dh>
+            <dd>
                 <input type="email" name="email" value="{{ old('email') }}">
-            </label>
-        </div>
-        
-        <div>
-            <label>
-                パスワード：
+            </dd>
+        </label>
+
+        <label>
+            <dh>
+                パスワード
+            </dh>
+            <dd>
                 <input type="password" name="password">
-            </label>
+            </dd>
+        </label>
+
+        <label>
+            <dh>
+                パスワード（確認用）
+            </dh>
+            <dd>
+                <input type="password" name="password_confirmation">
+            </dd>
+        </label>
         </div>
         
-        <div>
-            <label>
-                パスワード（確認用）：
-                <input type="password" name="password_confirmation">
-            </label>
-        </div>
-        <div>
-            <input class="btn btn-outline-primary" type="submit" value="登録">
-        </div>
+        <input class="btn btn-info" type="submit" value="新規登録">
     </form>
+</dl>
 @endsection

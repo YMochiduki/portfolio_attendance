@@ -7,13 +7,14 @@
 <div>
     <form class="form-inline" method="GET" 
             @if($action==='attendance.index' || $action==='students.search')
-                action="{{ route('students.search') }}">
+                action="{{ route('students.search') }}"
             @else
-                action="{{ route('students.searchList') }}">
+                action="{{ route('students.searchList') }}"
             @endif
+            >
         <div class="form-group form-row">
             <label>
-                <input type="number" name="year">年度
+                <input type="number" name="year" class="form-year">年度
                 <select name="grade">
                     @php $curriculum_year = Auth::user()->curriculum_year @endphp
                         <option valus=""></option>
@@ -40,11 +41,11 @@
     </form>
     <a class="btn btn-outline-info" 
         @if($action==='attendance.index' || $action==='students.search')
-            href="{{ route('attendance.index') }}">検索リセット</a>
+            href="{{ route('attendance.index') }}"
         @else
-            href="{{ route('students.index') }}">検索リセット</a>
+            href="{{ route('students.index') }}"
         @endif
-        
+        >検索リセット</a>
 </div>
 
 
@@ -53,12 +54,12 @@
     <table class="table">
         <thead class="thead-dark">
             <tr>
-                <th>年度</th>
-                <th>学年</th>
-                <th>組</th>
-                <th>出席番号</th>
-                <th>名前</th>
-                <th>
+                <th class="year">年度</th>
+                <th class="grade">学年</th>
+                <th class="class">組</th>
+                <th class="number">出席番号</th>
+                <th class="name">名前</th>
+                <th class="button">
                 @if($action==='attendance.index' || $action==='students.search')
                     入力
                 @else

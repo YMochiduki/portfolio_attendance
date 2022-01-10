@@ -15,23 +15,6 @@ class StudentImport implements ToModel, WithHeadingRow, WithValidation
     use Importable;
     public function model(array $row)
     {
-        // return new Student([
-        //     'year' => $row['年度'],
-        //     'user_id' => \Auth::user()->id,
-        //     'grade' => $row['学年'],
-        //     'class' => $row['クラス'],
-        //     'number' => $row['出席番号'],
-        //     'name' => $row['名前'],
-        // ]);
-    
-        // return new Student([
-        //     'year' => $row[0],
-        //     'user_id' => \Auth::user()->id,
-        //     'grade' => $row[2],
-        //     'class' => $row[3],
-        //     'number' => $row[4],
-        //     'name' => $row[5],
-        // ]);
         return new Student([
             'year' => $row['year'],
             'user_id' => \Auth::user()->id,
@@ -45,33 +28,26 @@ class StudentImport implements ToModel, WithHeadingRow, WithValidation
     public function rules(): array
     {
         return [
-            'year' => 'required',
-            'grade' => 'required',
-            'class' => 'required',
-
-            // 'grade' => 'required|integer|min:1|max:{\Auth::user()->curriculum_year}',
-            // 'class' => 'required|integer|min:1|max:{\Auth::user()->class_count}',
-            'grade' => 'required', 'numeric', 'min:1','integer|max:{\Auth::user()->curriculum_year}',
-            'class' => 'required', 'numeric', 'min:1','max:'[\Auth::user()->class_count],
-            'number' => 'required', 'numeric',
-            'name' => 'required', 'max:255'
+            'year' => ['required','numeric'],
+            'grade' => ['required', 'numeric', 'min:1'],
+            'class' => ['required', 'numeric', 'min:1'],
+            'number' => ['required', 'numeric'],
+            'name' => ['required', 'max:255']
         ];
     }
-    
+
+// バリデーションメッセージ不調要検証
     public function customValidationMessages()
-   {
+  {
     return [
-        'year.required' => '年度(year)が入力されていません',
-        'grade.required' => '学年(grade)が入力されていません',
-        'class.required' => '組(class)が入力されていません',
-        'number.required' => '出席番号(number)が入力されていません',
-        'name.required' => '名前(name)が入力されていません',
-        // 'grade.integer' => '学年(grade)には数字を入力してください',
-        // 'grade.min' => '学年(grade)には1以上の数字を入れてください',
-        // 'grade.max' => '学年(grade)には' . \Auth::user()->curriculum_year . '以下の数字を入れてください',
-        // 'class.integer' => '組(class)には数字を入力してください',
-        // 'class.min' => '組(class)には1以上の数字を入れてください',
-        // 'class.max' => '組(class)には' . \Auth::user()->class_count . '以下の数字を入れてください',
+        'year.required' => '年度(year)が入力されていない行があります。',
+        'grade.required' => '学年(grade)が入力されていない行があります。',
+        'class.required' => '組(class)が入力されていない行があります。',
+        'number.required' => '出席番号(number)が入力されていない行があります。',
+        'name.required' => '名前(name)が入力されていない行があります。',
+        'grade.numeric' => '学年(grade)は数字を入力してください。',
+        'class.numeric' => '組(class)は数字を入力してください。',
+        'number.numeric' => '出席番号(number)は数字を入力してください。',
     ];
-   }
+  }
 }

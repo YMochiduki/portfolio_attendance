@@ -1,28 +1,28 @@
 @extends('layouts.not_logged_in')
 
 @section('content')
-    <h1>ログイン</h1>
-    
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-        <div>
-            <label>
-                メールアドレス：
-                <input type="email" name="email" value="{{ old('email') }}">
+    <dl class="row">
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+            <label class="col-10">
+                <dh>
+                    メールアドレス
+                </dh>
+                <dt>
+                    <input type="email" name="email" value="{{ old('email') }}">
+                </dt>
             </label>
-        </div>
-        
-        <div>
-            <label>
-                パスワード：
+            <label class="col-10">
+                <dh>
+                パスワード
+                </dh>
+                <dt>
                 <input type="password" name="password" value="{{ old('password') }}">
+                </dt>
             </label>
-        </div>
-
-        <div>
-            <input class="btn btn-outline-primary" type="submit" value="ログイン">
-        </div>
-    </form>
+            <input class="btn btn-info" type="submit" value="ログイン">
+        </form>
+    </dl>
     <ul>
         <li>動作確認用アカウント</li>
         <li>メールアドレス：testuser@gmail.com</li>

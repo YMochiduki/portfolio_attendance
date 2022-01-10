@@ -9,6 +9,11 @@ use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $user = \Auth::user();
@@ -17,7 +22,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(UserRequest $request)
+        public function update(UserRequest $request)
     {
         \Auth::user()->update($request->only([
             'name',

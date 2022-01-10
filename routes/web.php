@@ -24,5 +24,5 @@ Route::get('attendances/search', 'AttendanceController@search')->name('attendanc
 //名簿エディット
 Route::get('user', 'UserController@index')->name('user.index');
 Route::patch('user','UserController@update')->name('user.update');
-
+Route::get('explanation', 'ExplanationController@explanation')->name('explanation');
 

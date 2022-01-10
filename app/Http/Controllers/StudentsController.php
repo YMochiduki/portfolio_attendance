@@ -95,4 +95,5 @@ class StudentsController extends Controller
         Student::query()->delete();
         return back();
     }
+
 }

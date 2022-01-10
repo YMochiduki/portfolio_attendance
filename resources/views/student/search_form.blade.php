@@ -6,53 +6,83 @@
 
 <div>
     <button class="btn btn-info" data-toggle="modal" data-target="#modal">生徒新規登録</button>
-<div class="modal fade" id="modal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-                <form method="POST" action="{{ route('students.store')}}">
-            @csrf
-                    <label>
-                        <input type="number" name="year" class="student-year" value="{{ old('year') }}">年度
-                    </label>
-                    <label>
-                        <select name="grade" class="student-edit">
-                            @for($i=1; $i <=$curriculum_year; $i++)
-                                <option value="{{ $i }}" @if(old('grade') === $i )selected @endif>{{ $i }}年</option>    
-                            @endfor
-                        </select>
-                    </label>
-                    <select name="class">
-                        @for($i=1; $i <= $class_count; $i++)
-                            <option value="{{ $i }}" @if(old('class') === $i )selected @endif>{{ $i }}組</option>    
-                        @endfor
-                    </select>
-                    <input type="number" name="number" class="student-edit" value="{{ old('number') }}">番
-                    <input type="text" name="name" class="student-name" value="{{ old('name') }}">
-                    <input class="btn btn-info" type="submit" value="追加">
-                </form>
+
+    <div class="modal fade" id="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p>生徒新規登録</p>
+                    <button class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('students.store')}}">
+                        @csrf
+                        <label>
+                            年度
+                            <input type="number" name="year" class="form-year" value="{{ old('year') }}">
+                        </label>
+                        <label>
+                            <select name="grade">
+                                @for($i=1; $i <=$curriculum_year; $i++)
+                                    <option value="{{ $i }}" @if(old('grade') === $i )selected @endif>{{ $i }}年</option>    
+                                @endfor
+                            </select>
+                        </label>
+                            <select name="class">
+                                @for($i=1; $i <= $class_count; $i++)
+                                    <option value="{{ $i }}" @if(old('class') === $i )selected @endif>{{ $i }}組</option>    
+                                @endfor
+                            </select>
+                        <label>
+                            出席番号
+                            <input type="number" name="number" class="form-year" value="{{ old('number') }}">
+                        </label>
+                        <label>
+                            名前
+                            <input type="text" name="name" value="{{ old('name') }}">
+                        </label>
+                        <input class="btn btn-info" type="submit" value="追加">
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div>
-    <form method="post" action="/students_import" enctype="multipart/form-data">
-        @csrf
-        <input class="excel" type="file" name="excel_file" ><br>
-        <input class="btn btn-info" type="submit" value="インポート">
-    </form>
-</div>
-<div>
-    <form method="post" action="{{ route('students.ListStyleExport') }}">
-        @csrf
-        <input type="submit" value="名簿様式ダウンロード">
-    </form>
-</div>
-<div>
-    <form method="post" action="{{ route('students.destroyMany') }}">
-        @csrf
-        @method('delete')
-        <input class="btn btn-dark" type="submit" value="削除">
-    </form>
+
+    <div>
+        <form method="post" action="/students_import" enctype="multipart/form-data">
+            @csrf
+            <input class="excel" type="file" name="excel_file" ><br>
+            <input class="btn btn-info" type="submit" value="エクセルからインポート">
+        </form>
+        <form method="post" action="{{ route('students.ListStyleExport') }}">
+            @csrf
+            <input type="submit" value="名簿様式ダウンロード">
+        </form>
+    </div>
+    
+    <button class="btn btn-info" data-toggle="modal" data-target="#modal-D-all">全ての生徒情報を削除</button>
+    <div class="modal fade" id="modal-D-all">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>生徒情報を削除を実行します。</p>
+                    <p>生徒情報を削除を実行すると、欠課欠席の記録も削除されます。</p>
+                    <form method="post" action="{{ route('students.destroyMany') }}">
+                        @csrf
+                        @method('delete')
+                        <input class="btn btn-dark" type="submit" value="削除">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @endsection
