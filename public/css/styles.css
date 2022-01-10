@@ -5,8 +5,24 @@ body {
   min-width: 450px;
 }
 
+.content {
+  margin-left:10px;
+}
+
+.error {
+  border: thin solid #777777;
+  background-color: #D6D7D8;
+  width: 75%;
+}
+.error-detail {
+  color: red;
+}
+.school-table {
+  width: 60%;
+}
+
 .date {
-  width: 8em;
+  width: 10em;
 }
 .grade {
   width: 4em;
@@ -24,7 +40,7 @@ body {
   min-width: 9em;
 }
 .contact {
-  min-width: 5em;
+  min-width: 6em;
 }
 .year {
   width: 6em;
@@ -32,16 +48,11 @@ body {
 .button {
   min-width: 7em;
 }
-
 .form-year {
   width: 5em;
 }
 .form-number {
   width: 5em;
-}
-
-.content {
-  margin-left:10px;
 }
 
 .title {
@@ -76,29 +87,11 @@ input, select{
   margin-right: 10px;
 }
 
-button {
-  display:inline-block;
-}
 .excel{
   margin: 0px;
   padding: 0em;
   border: none;
 }
-
-.error {
-  border: thin solid #777777;
-  background-color: #D6D7D8;
-  width: 75%;
-}
-
-.error-detail {
-  color: red;
-}
-
-.school-table {
-  width: 60%;
-}
-
 
 .school-dada {
   width: 90%;
@@ -116,7 +109,7 @@ button {
 
 h5 {
   padding: 0.5em;
-  background: #eaf3ff;
+  background-color: #eaf3ff;
   border-left: double 8px #17a2b8;
   box-shadow: 0 0 4px #d7d7d7;
 }

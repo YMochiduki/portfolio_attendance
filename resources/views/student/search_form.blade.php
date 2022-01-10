@@ -4,11 +4,14 @@
 @php $curriculum_year = Auth::user()->curriculum_year @endphp
 @php $class_count = Auth::user()->class_count @endphp
 
-<div>
-    <button class="btn btn-info" data-toggle="modal" data-target="#modal">生徒新規登録</button>
-
-    <div class="modal fade" id="modal">
-        <div class="modal-dialog">
+<p class="description-head">◆名簿追加</p>
+<div class="list-edit">
+<dl class="row">
+    <dt class="col-sm-3 col-10">個別追加</dt>
+    <dd class="col-sm-9 col-10">
+        <button class="btn btn-info" data-toggle="modal" data-target="#modal">生徒新規登録</button>
+        <div class="modal fade" id="modal">
+            <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <p>生徒新規登録</p>
@@ -48,23 +51,34 @@
                 </div>
             </div>
         </div>
-    </div>
+        </div>
+    </dd>
 
-    <div>
+    <dt class="col-sm-3 col-10">一括追加</dt>
+    <dd class="col-sm-9 col-10">
         <form method="post" action="/students_import" enctype="multipart/form-data">
             @csrf
             <input class="excel" type="file" name="excel_file" ><br>
             <input class="btn btn-info" type="submit" value="エクセルからインポート">
         </form>
+    </dd>
+
+    <dt class="col-sm-3 col-10">一括追加用様式</dt>
+    <dd class="col-sm-9 col-10">
         <form method="post" action="{{ route('students.ListStyleExport') }}">
             @csrf
             <input type="submit" value="名簿様式ダウンロード">
         </form>
-    </div>
-    
-    <button class="btn btn-info" data-toggle="modal" data-target="#modal-D-all">全ての生徒情報を削除</button>
-    <div class="modal fade" id="modal-D-all">
-        <div class="modal-dialog">
+    </dd>
+</dl>
+
+</div>
+<p class="description-head">◆名簿削除</p>
+<div class="text-right">
+    <button class="btn btn-dark" data-toggle="modal" data-target="#modal-D-all">全ての生徒情報を削除</button>
+</div>
+<div class="modal fade" id="modal-D-all">
+    <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button class="close" data-dismiss="modal">
@@ -72,7 +86,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>生徒情報を削除を実行します。</p>
+                    <p>全ての生徒情報を削除を実行します。</p>
                     <p>生徒情報を削除を実行すると、欠課欠席の記録も削除されます。</p>
                     <form method="post" action="{{ route('students.destroyMany') }}">
                         @csrf
@@ -82,7 +96,8 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
+
+<p class="description-head">◆生徒検索</p>
 
 @endsection

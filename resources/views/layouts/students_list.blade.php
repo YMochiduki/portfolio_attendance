@@ -1,9 +1,10 @@
 @extends('layouts.logged_in')
 @section('content')
+
+@yield('search_form')
 @php
     $action = Request::route()->getName()
 @endphp
-
 <div>
     <form class="form-inline" method="GET" 
             @if($action==='attendance.index' || $action==='students.search')
@@ -39,17 +40,16 @@
         </div>
         <input class="btn btn-info" type="submit" value="検索">
     </form>
-    <a class="btn btn-outline-info" 
+    <div>
+    <a class="btn btn-outline-info"
         @if($action==='attendance.index' || $action==='students.search')
             href="{{ route('attendance.index') }}"
         @else
             href="{{ route('students.index') }}"
         @endif
         >検索リセット</a>
+    </div>
 </div>
-
-
-@yield('search_form')
 
     <table class="table">
         <thead class="thead-dark">
@@ -109,7 +109,7 @@
                                 <div class="modal-body">
                                     <form method="post" action="{{ route('attendance.store') }}">
                                     @csrf
-                                        <input type="date" name="date"
+                                        <input type="date" name="date" class="date"
                                             @if(old('date') !== null) value="{{old('date')}}"
                                             @else value="@php echo date('Y-m-d') @endphp"
                                             @endif >

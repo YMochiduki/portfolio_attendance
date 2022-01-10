@@ -1,13 +1,12 @@
 @extends('layouts.logged_in')
 @section('content')
-<div>
+
     <form method="GET" action="{{ route('attendances.search') }}">
         @csrf
             <label>
                 欠課・欠席日
-                <input type="date" name="date" value="@php echo date('Y-m-d') @endphp">
+                <input type="date" name="date" value="@php echo date('Y-m-d') @endphp" class="date">
             </label>
-            
             <label>
                 学年
                 <select name="grade">
@@ -27,23 +26,26 @@
                 </select>
             </label>
             <input class="btn btn-info" type="submit" value="検索">
-        </form>
+    </form>
+    <div>
         <a class="btn btn-outline-info" href="{{ route('attendance.create') }}">検索リセット</a>
-</div>
+    </div>
+
 <div>
     <form method="post" action="/attendances_export">
         @csrf
-        <input type="submit" value="欠課・欠席情報ダウンロード">
+        <input type="submit" value="欠課・欠席情報ダウンロード" >
     </form>
 </div>
-
-
 @php
     $action = explode('@',Route::getCurrentRoute()->getActionName())[1]
 @endphp
 @if($action==='create')
     <p>条件を設定して検索してください。</p>
 @else
+
+
+
 <div class="table-responsive">
     <table class="table">
         <thead class="thead-dark">
