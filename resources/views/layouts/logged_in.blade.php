@@ -10,7 +10,7 @@
 @endsection
 
 @section('right_menu')
-  <nav class="navbar navbar-expand-sm navbar-light navbar-light">
+  <nav class="navbar navbar-expand-md navbar-light navbar-light">
     <button class="navbar-toggler" data-toggle="collapse" data-target="#mainNav">
       <span>メニュー</span>
     </button>

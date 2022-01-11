@@ -6,7 +6,7 @@
 
 <p class="description-head">◆名簿追加</p>
 <div class="list-edit">
-<dl class="row">
+<dl class="row attend">
     <dt class="col-sm-3 col-10">個別追加</dt>
     <dd class="col-sm-9 col-10">
         <button class="btn btn-info" data-toggle="modal" data-target="#modal">生徒新規登録</button>
@@ -54,12 +54,12 @@
         </div>
     </dd>
 
-    <dt class="col-sm-3 col-10">一括追加</dt>
+    <dt class="col-sm-3 col-10">一括追加<br>(エクセル)</dt>
     <dd class="col-sm-9 col-10">
         <form method="post" action="/students_import" enctype="multipart/form-data">
             @csrf
-            <input class="excel" type="file" name="excel_file" ><br>
-            <input class="btn btn-info" type="submit" value="エクセルからインポート">
+            <input class="excel form-group" type="file" name="excel_file" >
+            <input class="btn btn-info form-group" type="submit" value="インポート">
         </form>
     </dd>
 

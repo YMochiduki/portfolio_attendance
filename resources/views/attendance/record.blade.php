@@ -47,11 +47,14 @@
 
 
 <div class="table-responsive">
+    
+    @if($attendances->first() !== null)
+        <p>検索対象日：{{ $attendances->first()->date }}</p>
+    @endif
     <table class="table">
         <thead class="thead-dark">
         <tr>
             <tr>
-                <th class="date">欠課・欠席日</th>
                 <th class='grade'>学年</th>
                 <th class="class">組</th>
                 <th class="number">出席番号</th>
@@ -61,12 +64,8 @@
             </tr>
         </thead>
         <tbody>
-            
         @forelse($attendances as $attendance)
         <tr>
-            <td>
-                {{ $attendance->date }}
-            </td>
             <td>
                 {{ $attendance->student->grade }}年
             </td>
@@ -89,7 +88,7 @@
         </tr>
         <tr>
                     
-            <td colspan="6">
+            <td colspan="5">
                 欠課・欠席理由：{{ $attendance->reason }}
             </td>
             <td>

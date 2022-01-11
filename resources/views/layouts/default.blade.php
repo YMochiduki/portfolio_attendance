@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="row">
-    <div class="offset-sm-1 col-10">
+    <div class="offset-md-1 offset-0 col-md-10 col-12">
             @yield('header')
             {{-- エラーメッセージを出力 --}}
             @if($errors->all() !== [])
@@ -38,11 +38,11 @@
     </div>
 </div>
 
-    <div class="row offset-1">
-        <div class="col-sm-9 col-10  order-2 order-sm-1 content">
+    <div class="row offset-sm-1 offset-0 ">
+        <div class="col-9  order-2 order-md-1 content">
             @yield('content')
         </div>
-        <div class="col-sm-2 col-10 order-1 order-sm-2 right-menu">
+        <div class="col-md-2 col-0 order-1 order-md-2 right-menu">
             @yield('right_menu')
         </div>
     </div>

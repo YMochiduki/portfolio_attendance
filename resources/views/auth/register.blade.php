@@ -1,7 +1,7 @@
 @extends('layouts.not_logged_in')
 
 @section('content')
-<dl class="row">
+<dl class="row col-sm-11">
     <form method="POST" action="{{ route('register') }}">
         @csrf
         <div>
@@ -25,7 +25,7 @@
 
         <label>
             <dh>
-                クラス数（１学年あたり最大数）
+                クラス数（１学年最大数）
             </dh>
             <dd>
                 <input type="number" name="class_count" value="{{ old('class_count') }}">

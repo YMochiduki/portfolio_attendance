@@ -6,9 +6,15 @@ body {
 }
 
 .content {
-  margin-left:10px;
+  margin-left:20px;
 }
 
+.right-menu {
+  margin-left: 20px;
+}
+.right-menu div{
+  margin-left:-20px;
+}
 .error {
   border: thin solid #777777;
   background-color: #D6D7D8;
@@ -99,10 +105,10 @@ input, select{
   padding: 10px;
 }
 
-.school-dada dt {
+.school-dada dt, .attend dt {
   border-bottom: 1px dotted #ccc; 
 }
-.school-dada dt, dd {
+.school-dada dt, dd ,.attend dt, .attend dd {
   border-bottom: 1px dotted #ccc; 
   margin-bottom: 0px;
 }
