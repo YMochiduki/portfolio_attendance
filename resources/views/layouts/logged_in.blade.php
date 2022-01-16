@@ -2,7 +2,7 @@
  
 @section('header')
 <header class="title bg-info">
-      <h3>欠課・欠席記録システム</h3>
+      <h3>学校用欠課・欠席記録システム</h3>
       <h4>{{ Auth::user()->name }}</h4>
       
 </header>  
