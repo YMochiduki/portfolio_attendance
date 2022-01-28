@@ -92,7 +92,7 @@ class StudentsController extends Controller
     }
     
     public function destroyMany(){
-        Student::query()->delete();
+        Student::query()->where('user_id', '=' , \Auth::id() )->delete();
         return back();
     }
 

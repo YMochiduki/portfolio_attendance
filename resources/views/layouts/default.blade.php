@@ -38,7 +38,7 @@
     </div>
 </div>
 
-    <div class="row offset-sm-1 offset-0 ">
+    <div class="row offset-sm-1 offset-0">
         <div class="col-9  order-2 order-md-1 content">
             @yield('content')
         </div>

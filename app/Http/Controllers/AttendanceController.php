@@ -80,8 +80,7 @@ class AttendanceController extends Controller
     public function update($id, AttendanceRequest $request)
     {
         $attendance = Attendance::find($id);
-        // return $attendance;
-        
+    
         $attendance->update($request->only([
             'date',
             'absence_time',
